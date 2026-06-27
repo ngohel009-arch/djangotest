@@ -18,38 +18,47 @@
 body{
     min-height:100vh;
     background:
-    radial-gradient(circle at top left,#dbeafe,transparent 35%),
-    radial-gradient(circle at bottom right,#cffafe,transparent 35%),
+    radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
     #f8fbff;
 }
 
 /* NAVBAR */
 .navbar-custom{
-    width:95%;
-    margin:20px auto;
+    width:98%;
+    margin:18px auto;
     background:rgba(255,255,255,.92);
     backdrop-filter:blur(15px);
-    border-radius:28px;
-    padding:15px 25px;
-    box-shadow:0 16px 40px rgba(37,99,235,.15);
+    border-radius:24px;
+    padding:12px 22px;
+    box-shadow:0 12px 35px rgba(37,99,235,.12);
+    border:1px solid #e5e7eb;
 }
 
 .navbar-brand{
     color:#2563eb !important;
     font-size:28px;
-    font-weight:950;
+    font-weight:900;
+    white-space:nowrap;
 }
 
 .navbar-brand i{
     color:#06b6d4;
 }
 
+.navbar-nav{
+    gap:8px;
+    flex-wrap:nowrap;
+}
+
 .nav-link{
     color:#475569 !important;
-    font-weight:800;
-    font-size:14px;
-    border-radius:14px;
     padding:10px 14px !important;
+    border-radius:14px;
+    font-size:13px;
+    font-weight:800;
+    white-space:nowrap;
+    transition:.3s;
 }
 
 .nav-link:hover,
@@ -61,25 +70,29 @@ body{
 .logout-btn{
     background:#fee2e2;
     color:#dc2626 !important;
+    padding:11px 18px;
     border-radius:15px;
-    padding:10px 18px;
-    font-weight:850;
     text-decoration:none;
+    font-size:13px;
+    font-weight:900;
+    white-space:nowrap;
+    transition:.3s;
+}
+
+.logout-btn:hover{
+    background:#dc2626;
+    color:white !important;
 }
 
 /* HERO */
 .page-hero{
     width:95%;
     margin:25px auto;
-    background:
-    linear-gradient(135deg,rgba(37,99,235,.92),rgba(6,182,212,.88)),
-    url("https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1400&q=80");
-    background-size:cover;
-    background-position:center;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
     color:white;
-    border-radius:42px;
-    padding:70px 60px;
-    box-shadow:0 25px 55px rgba(37,99,235,.28);
+    border-radius:35px;
+    padding:55px;
+    box-shadow:0 20px 45px rgba(37,99,235,.22);
     position:relative;
     overflow:hidden;
 }
@@ -87,11 +100,11 @@ body{
 .page-hero::after{
     content:"PAYMENTS";
     position:absolute;
-    right:30px;
+    right:35px;
     bottom:-25px;
-    font-size:100px;
+    font-size:95px;
     font-weight:950;
-    color:rgba(255,255,255,.12);
+    color:rgba(255,255,255,.13);
 }
 
 .page-hero h1{
@@ -114,29 +127,30 @@ body{
     margin:30px auto;
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    gap:22px;
 }
 
 .stat-card{
     background:white;
-    border-radius:30px;
+    border-radius:28px;
     padding:25px;
     display:flex;
     align-items:center;
     gap:18px;
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-    border:1px solid #e2e8f0;
+    box-shadow:0 15px 35px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
     transition:.3s;
 }
 
 .stat-card:hover{
-    transform:translateY(-8px);
+    transform:translateY(-6px);
+    box-shadow:0 20px 45px rgba(37,99,235,.13);
 }
 
 .stat-icon{
     width:68px;
     height:68px;
-    border-radius:23px;
+    border-radius:22px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -167,7 +181,7 @@ body{
     margin:0;
     font-size:28px;
     font-weight:950;
-    color:#1e293b;
+    color:#0f172a;
 }
 
 .stat-card p{
@@ -176,52 +190,64 @@ body{
     font-weight:800;
 }
 
-/* CARD */
+/* MAIN CARD */
 .main-card{
     width:95%;
     margin:30px auto;
-    background:white;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
     border-radius:35px;
     padding:32px;
-    box-shadow:0 18px 45px rgba(0,0,0,.09);
+    box-shadow:0 18px 45px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
 }
 
 .page-title{
-    font-size:35px;
+    font-size:38px;
     font-weight:950;
-    color:#1e293b;
+    color:#0f172a;
 }
 
-.add-btn{
-    background:linear-gradient(135deg,#2563eb,#06b6d4);
-    color:white;
-    border-radius:18px;
-    padding:13px 22px;
-    font-weight:850;
-    text-decoration:none;
-}
-
-.add-btn:hover{
-    color:white;
-    box-shadow:0 12px 28px rgba(37,99,235,.35);
+.page-title i{
+    color:#2563eb;
 }
 
 /* FILTER */
 .filter-box{
-    background:linear-gradient(135deg,#f8fafc,#eff6ff);
+    background:#f8fafc;
     border-radius:28px;
     padding:24px;
-    border:1px solid #dbeafe;
+    border:1px solid #e5e7eb;
+}
+
+.form-label{
+    font-weight:850;
+    color:#0f172a;
 }
 
 .form-control{
-    border-radius:15px;
-    padding:12px;
-    border:1px solid #cbd5e1;
+    border-radius:16px;
+    padding:13px;
+    border:1px solid #dbeafe;
+    font-weight:700;
 }
 
 .form-control:focus{
+    border-color:#2563eb;
     box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.btn-outline-primary{
+    border-radius:18px !important;
+    padding:12px;
+    font-weight:900;
+    border:1px solid #2563eb;
+    color:#2563eb;
+}
+
+.btn-outline-primary:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
 }
 
 /* TABLE */
@@ -229,7 +255,7 @@ body{
     margin-top:30px;
     border-radius:28px;
     overflow:hidden;
-    border:1px solid #e2e8f0;
+    border:1px solid #e5e7eb;
 }
 
 .table{
@@ -237,11 +263,12 @@ body{
 }
 
 .table thead th{
-    background:#eff6ff;
-    color:#1e293b;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
     padding:17px;
     font-size:14px;
     font-weight:950;
+    border:none;
 }
 
 .table tbody td{
@@ -249,34 +276,40 @@ body{
     vertical-align:middle;
     color:#334155;
     font-weight:700;
+    border-bottom:1px solid #edf2f7;
+}
+
+.table tbody tr:nth-child(even){
+    background:#f8fbff;
 }
 
 .table tbody tr:hover{
-    background:#f8fafc;
+    background:#eff6ff;
+}
+
+.member-badge,
+.plan-badge,
+.trainer-badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:900;
+    font-size:13px;
 }
 
 .member-badge{
     background:#dbeafe;
-    color:#1d4ed8;
-    padding:8px 14px;
-    border-radius:20px;
-    font-weight:850;
+    color:#2563eb;
 }
 
 .plan-badge{
     background:#f3e8ff;
     color:#7e22ce;
-    padding:8px 14px;
-    border-radius:20px;
-    font-weight:850;
 }
 
 .trainer-badge{
     background:#ecfeff;
     color:#0891b2;
-    padding:8px 14px;
-    border-radius:20px;
-    font-weight:850;
 }
 
 .amount{
@@ -290,25 +323,31 @@ body{
     max-width:260px;
 }
 
-/* EMPTY */
 .empty-box{
     text-align:center;
     padding:45px;
     color:#64748b;
 }
 
-/* MOBILE */
-@media(max-width:992px){
+/* RESPONSIVE */
+@media(max-width:1200px){
+    .navbar-nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        margin-top:12px;
+    }
+
+    .logout-btn{
+        margin-top:12px;
+        display:inline-block;
+    }
+
     .stats-area{
         grid-template-columns:repeat(2,1fr);
     }
 }
 
 @media(max-width:768px){
-    .navbar-custom{
-        border-radius:20px;
-    }
-
     .page-hero{
         padding:40px 25px;
         text-align:center;
@@ -339,7 +378,7 @@ body{
     <div class="container-fluid">
 
         <a class="navbar-brand" href="#">
-            <i class="fa-solid fa-dumbbell"></i> My.Gym
+            🏋 My.Gym
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
@@ -349,12 +388,67 @@ body{
         <div class="collapse navbar-collapse" id="menu">
 
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="/admindashboard/">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="/adminmembers/">Members</a></li>
-                <li class="nav-item"><a class="nav-link" href="/adminplans/">Plans</a></li>
-                <li class="nav-item"><a class="nav-link" href="/admintrainers/">Trainers</a></li>
-                <li class="nav-item"><a class="nav-link active" href="/adminpayments/">Payments</a></li>
-                <li class="nav-item"><a class="nav-link" href="/adminequipment/">Equipment</a></li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-chart-line"></i> Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-users"></i> Members
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-file-lines"></i> Plans
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="#">
+                        <i class="fa-solid fa-user-tie"></i> Trainers
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        <i class="fa-solid fa-credit-card"></i> Payments
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-calendar-check"></i> Attendance
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-dumbbell"></i> Equipment
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-circle-question"></i> Enquiries
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-person-running"></i> Workout Plans
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-star"></i> Feedbacks
+                    </a>
+                </li>
+
             </ul>
 
             <a href="/adminlogin/" class="logout-btn">

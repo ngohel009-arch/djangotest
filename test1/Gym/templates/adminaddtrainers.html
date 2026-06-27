@@ -11,93 +11,253 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
 
-        body{
-            background:#f5f7fa;
-            font-family:'Segoe UI',sans-serif;
-        }
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
+    #f8fbff;
+}
+/* ================= NAVBAR ================= */
 
-        /* Navbar */
+.navbar-custom{
+    width:98%;
+    margin:18px auto;
+    padding:12px 22px;
+    border-radius:22px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    box-shadow:0 12px 35px rgba(37,99,235,.12);
+    border:1px solid #e5e7eb;
+}
 
-        .navbar-custom{
-            background:#0e1a33;
-            padding:10px 20px;
-        }
+.navbar-brand{
+    font-size:28px;
+    font-weight:900;
+    color:#2563eb !important;
+    white-space:nowrap;
+}
 
-        .navbar-brand{
-            color:white !important;
-            font-weight:700;
-            font-size:22px;
-        }
+.navbar-collapse{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        .navbar-nav .nav-link{
-            color:#d7dce5 !important;
-            font-size:14px;
-            margin-right:10px;
-        }
+.navbar-nav{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:8px;
+    flex-wrap:nowrap;
+    margin:auto;
+}
 
-        .navbar-nav .nav-link:hover{
-            color:white !important;
-        }
+.navbar-nav .nav-link{
+    color:#475569 !important;
+    padding:10px 12px !important;
+    border-radius:14px;
+    font-size:13px;
+    font-weight:800;
+    white-space:nowrap;
+    transition:.3s;
+}
 
-        .logout-btn{
-            background:#5c2d39;
-            color:white !important;
-            border-radius:6px;
-            padding:7px 14px !important;
-        }
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white !important;
+}
 
-        /* Card */
+.logout-btn{
+    text-decoration:none;
+    background:#fee2e2;
+    color:#dc2626;
+    padding:11px 18px;
+    border-radius:15px;
+    font-size:13px;
+    font-weight:900;
+    white-space:nowrap;
+    transition:.3s;
+}
 
-        .trainer-card{
-            background:white;
-            border-radius:18px;
-            padding:25px;
-            margin-top:25px;
-            box-shadow:0px 2px 8px rgba(0,0,0,.08);
-        }
+.logout-btn:hover{
+    background:#dc2626;
+    color:white;
+}
 
-        .title{
-            font-size:22px;
-            font-weight:700;
-        }
+.navbar-toggler{
+    border:none;
+    border-radius:14px;
+}
+/* PAGE */
 
-        .subtitle{
-            color:#777;
-            font-size:14px;
-        }
+.trainer-card{
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(15px);
+    border-radius:35px;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
+    margin-top:0;
+}
 
-        .form-control{
-            height:42px;
-        }
+/* HEADER */
+.title{
+    font-size:42px;
+    font-weight:900;
+    color:#0f172a;
+}
 
-        .save-btn{
-            background:#16202d;
-            color:white;
-            border:none;
-            border-radius:8px;
-            padding:8px 16px;
-            font-weight:600;
-        }
+.title i{
+    color:#2563eb;
+}
 
-        .save-btn:hover{
-            background:#0e1a33;
-        }
+.subtitle{
+    margin-top:8px;
+    color:#64748b;
+    font-size:15px;
+    font-weight:600;
+}
 
-        .cancel-btn{
-            border-radius:8px;
-        }
+.back-btn{
+    text-decoration:none;
+    background:white;
+    color:#475569;
+    border:1px solid #dbeafe;
+    padding:13px 22px;
+    border-radius:18px;
+    font-weight:800;
+    transition:.3s;
+}
 
-        .back-btn{
-            border-radius:30px;
-            padding:8px 18px;
-        }
+.back-btn:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+}
 
-        .field-note{
-            font-size:13px;
-            color:#777;
-        }
+/* FORM */
+.form-label{
+    font-size:15px;
+    font-weight:900 !important;
+    color:#0f172a;
+}
 
+.form-control{
+    height:52px;
+    border:1px solid #dbeafe;
+    border-radius:18px;
+    padding:14px 16px;
+    font-size:15px;
+    font-weight:700;
+    background:#f8fafc;
+    transition:.3s;
+}
+
+.form-control:focus{
+    background:white;
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.field-note{
+    font-size:13px;
+    color:#64748b;
+    font-weight:600;
+}
+
+/* BUTTONS */
+.save-btn{
+    border:none;
+    cursor:pointer;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    padding:15px 28px;
+    border-radius:18px;
+    font-size:15px;
+    font-weight:900;
+    transition:.3s;
+}
+
+.save-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(37,99,235,.30);
+}
+
+.cancel-btn{
+    text-decoration:none;
+    background:#fee2e2 !important;
+    color:#dc2626 !important;
+    border:1px solid #fecaca !important;
+    padding:14px 24px;
+    border-radius:18px !important;
+    font-weight:900;
+    transition:.3s;
+}
+
+.cancel-btn:hover{
+    background:#dc2626 !important;
+    color:white !important;
+}
+
+.text-muted.small{
+    margin-top:20px !important;
+    color:#64748b !important;
+    font-size:14px;
+    font-weight:700;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1200px){
+
+    .navbar-nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        margin-top:15px;
+    }
+
+    .logout-btn{
+        margin-top:15px;
+        display:inline-block;
+    }
+}
+
+@media(max-width:768px){
+
+    .navbar-custom{
+        width:96%;
+    }
+
+    .navbar-collapse{
+        margin-top:15px;
+    }
+
+    .main-card{
+        padding:22px;
+        overflow-x:auto;
+    }
+
+    .table{
+        min-width:850px;
+    }
+
+    .page-title{
+        font-size:32px;
+    }
+
+    .main-card > .d-flex{
+        flex-direction:column;
+        align-items:flex-start !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -218,8 +378,7 @@
 
             </div>
 
-            <a href="#"
-               class="btn btn-outline-dark back-btn">
+            <a href="/admintrainers" class="btn btn-outline-dark back-btn">
 
                 <i class="fa-solid fa-arrow-left"></i>
                 Back to Trainers
