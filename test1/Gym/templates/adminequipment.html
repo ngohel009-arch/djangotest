@@ -8,7 +8,6 @@
 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -17,148 +16,446 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.m
 }
 
 body{
-    background:#f4f7fb;
-    padding:25px;
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
+    #f8fbff;
+    padding:30px;
 }
 
-.container{
-    background:#fff;
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    width:100%;
+    margin:20px auto;
+    padding:16px 24px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 15px 40px rgba(37,99,235,.10);
+    border:1px solid #e5e7eb;
+}
+
+/* LOGO */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:32px;
+    font-weight:900;
+    color:#2563eb;
+    text-decoration:none;
+    white-space:nowrap;
+}
+
+.logo i{
+    color:#06b6d4;
+    font-size:28px;
+}
+
+/* MENU */
+
+.menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    flex:1;
+    margin:0 25px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#475569;
+    padding:11px 16px;
+    border-radius:16px;
+    font-size:14px;
+    font-weight:800;
+    transition:.3s;
+    white-space:nowrap;
+    border:1px solid transparent;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(37,99,235,.25);
+}
+
+/* LOGOUT */
+
+.logout-btn{
+    text-decoration:none;
+    background:#fee2e2;
+    color:#dc2626;
+    padding:12px 22px;
     border-radius:18px;
-    padding:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    font-size:15px;
+    font-weight:900;
+    transition:.3s;
+    white-space:nowrap;
 }
 
+.logout-btn:hover{
+    background:#dc2626;
+    color:white;
+    transform:translateY(-2px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+    .navbar{
+        flex-direction:column;
+        gap:18px;
+        padding:22px;
+    }
+
+    .menu{
+        width:100%;
+        justify-content:center;
+        margin:0;
+    }
+}
+
+@media(max-width:768px){
+
+    .menu{
+        gap:8px;
+    }
+
+    .menu a{
+        font-size:13px;
+        padding:10px 12px;
+    }
+
+    .logo{
+        font-size:28px;
+    }
+}
+
+/* MAIN CONTAINER */
+.container{
+    width:100%;
+    margin:30px auto;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:35px;
+    padding:32px;
+    box-shadow:0 18px 45px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
+}
+
+/* HEADER */
 .header{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    margin-bottom:20px;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-bottom:28px;
 }
 
 .header h2{
-    font-size:38px;
-    color:#1f2937;
+    font-size:42px;
+    font-weight:950;
+    color:#0f172a;
+}
+
+.header h2 i{
+    color:#2563eb;
 }
 
 .header p{
-    color:#6b7280;
-    margin-top:5px;
-}
-
-.add-btn{
-    background:#1f2937;
-    color:#fff;
-    text-decoration:none;
-    padding:12px 18px;
-    border-radius:10px;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    margin-bottom:20px;
-}
-
-.stat-box{
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:15px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.icon{
-    width:40px;
-    height:40px;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.blue{
-    background:#eef2ff;
-}
-
-.green{
-    background:#ecfdf5;
-}
-
-.red{
-    background:#fef2f2;
-}
-
-.stat-title{
-    color:#6b7280;
-    font-size:13px;
-}
-
-.stat-value{
-    font-size:20px;
+    color:#64748b;
+    margin-top:8px;
+    font-size:15px;
     font-weight:700;
 }
 
+.add-btn{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:18px;
+    font-weight:900;
+    transition:.3s;
+}
+
+.add-btn:hover{
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(37,99,235,.30);
+}
+
+/* SUMMARY CARDS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:28px;
+}
+
+.stat-box{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:28px;
+    padding:24px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    box-shadow:0 10px 25px rgba(15,23,42,.08);
+    transition:.3s;
+}
+
+.stat-box:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 35px rgba(37,99,235,.12);
+}
+
+.icon{
+    width:62px;
+    height:62px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.blue{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.green{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.red{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.stat-title{
+    color:#64748b;
+    font-size:14px;
+    font-weight:800;
+}
+
+.stat-value{
+    font-size:28px;
+    font-weight:950;
+    color:#0f172a;
+    margin-top:4px;
+}
+
+/* TABLE */
 table{
     width:100%;
     border-collapse:collapse;
+    overflow:hidden;
+    border-radius:24px;
+}
+
+thead{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
 }
 
 th{
-    background:#f3f4f6;
+    color:white;
     text-align:left;
-    padding:14px;
+    padding:17px;
+    font-size:14px;
+    font-weight:950;
 }
 
 td{
-    padding:14px;
-    border-top:1px solid #eee;
+    padding:17px;
+    border-bottom:1px solid #edf2f7;
+    color:#334155;
+    font-size:15px;
+    font-weight:700;
+    background:white;
+}
+
+tbody tr:nth-child(even) td{
+    background:#f8fbff;
+}
+
+tbody tr:hover td{
+    background:#eff6ff;
 }
 
 .equipment-name{
-    font-weight:600;
+    font-weight:950;
+    color:#0f172a;
+    font-size:16px;
 }
 
 .equipment-type{
     font-size:13px;
-    color:#6b7280;
+    color:#64748b;
+    margin-top:5px;
+    font-weight:700;
+}
+
+.equipment-type i{
+    color:#2563eb;
 }
 
 .unit-badge{
-    background:#f3f4f6;
-    padding:4px 10px;
+    background:#dbeafe;
+    color:#2563eb;
+    padding:8px 14px;
     border-radius:20px;
     font-size:13px;
+    font-weight:900;
+    display:inline-block;
 }
 
+/* ACTION BUTTONS IF USED */
 .edit-btn{
     color:#f59e0b;
-    border:1px solid #f59e0b;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
     text-decoration:none;
-    padding:4px 10px;
-    border-radius:20px;
+    padding:8px 14px;
+    border-radius:18px;
     font-size:13px;
+    font-weight:900;
+}
+
+.edit-btn:hover{
+    background:#f59e0b;
+    color:white;
 }
 
 .delete-btn{
-    color:#ef4444;
-    border:1px solid #ef4444;
+    color:#dc2626;
+    background:#fee2e2;
+    border:1px solid #fecaca;
     text-decoration:none;
-    padding:4px 10px;
-    border-radius:20px;
+    padding:8px 14px;
+    border-radius:18px;
     font-size:13px;
-    margin-left:5px;
+    font-weight:900;
+    margin-left:6px;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
+    color:white;
 }
 
 .empty{
     text-align:center;
-    padding:20px;
+    padding:35px !important;
+    color:#64748b;
+    font-size:18px;
+    font-weight:900;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    body{
+        padding:15px;
+    }
+
+    .container{
+        width:100%;
+        padding:22px;
+        overflow-x:auto;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    table{
+        min-width:700px;
+    }
+
+    .header{
+        flex-direction:column;
+    }
+
+    .header h2{
+        font-size:32px;
+    }
 }
 
 </style>
 </head>
 <body>
+
+<div class="navbar">
+
+    <a href="{% url 'admindashboard' %}" class="logo">
+        🏋 My.Gym
+    </a>
+
+    <div class="menu">
+
+        <a href="{% url 'admindashboard' %}">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+
+        <a href="{% url 'adminmember' %}">
+            <i class="bi bi-people"></i> Members
+        </a>
+
+        <a href="{% url 'adminplan' %}">
+            <i class="bi bi-card-list"></i> Plans
+        </a>
+
+        <a href="{% url 'admintrainers' %}">
+            <i class="bi bi-person-workspace"></i> Trainers
+        </a>
+
+        <a href="{% url 'adminpayment' %}">
+            <i class="bi bi-credit-card"></i> Payments
+        </a>
+
+        <a href="{% url 'adminattendance' %}" >
+            <i class="bi bi-calendar-check"></i> Attendance
+        </a>
+
+        <a href="{% url 'adminequipment' %}"class="active">
+            <i class="bi bi-tools"></i> Equipment
+        </a>
+
+        <a href="{% url 'adminenquiries' %}">
+            <i class="bi bi-chat-left-text"></i> Enquiries
+        </a>
+
+        <a href="{% url 'adminworkoutplans' %}">
+            <i class="bi bi-journal-check"></i> Workout Plans
+        </a>
+
+        <a href="{% url 'adminfeedback' %}">
+            <i class="bi bi-star"></i> Feedbacks
+        </a>
+
+    </div>
+
+    <a href="javascript:void(0)" onclick="adminLogout()" class="logout-btn">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+
+</div>
 
 <div class="container">
 

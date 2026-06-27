@@ -17,95 +17,273 @@
     />
 
     <style>
-      body {
-        background: #f4f6f9;
-        font-family: "Segoe UI", sans-serif;
-      }
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
 
-      /* NAVBAR */
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
+    #f8fbff;
+}
 
-      .top-navbar {
-        background: #1f2d3d;
-        padding: 8px 20px;
-      }
+/* NAVBAR */
+.top-navbar{
+    width:98%;
+    margin:18px auto;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:24px;
+    padding:12px 22px;
+    box-shadow:0 12px 35px rgba(37,99,235,.12);
+    border:1px solid #e5e7eb;
+}
 
-      .top-navbar .navbar-brand {
-        color: #fff;
-        font-weight: 700;
-        font-size: 22px;
-      }
+.top-navbar .container-fluid{
+    width:100%;
+    margin:0;
+    padding:0 !important;
+}
 
-      .top-navbar .nav-link {
-        color: #d8dde3;
-        font-size: 14px;
-        margin-right: 15px;
-      }
+.top-navbar .navbar-brand{
+    color:#2563eb !important;
+    font-size:28px;
+    font-weight:900;
+    white-space:nowrap;
+}
 
-      .top-navbar .nav-link:hover {
-        color: #fff;
-      }
+.top-navbar .navbar-brand i{
+    color:#06b6d4;
+}
 
-      .logout-btn {
-        background: #6c2334;
-        color: white;
-        border: none;
-        padding: 6px 15px;
-        border-radius: 5px;
-      }
+.top-navbar .navbar-collapse{
+    justify-content:space-between;
+}
 
-      /* CARD */
+.top-navbar .navbar-nav{
+    gap:8px;
+    flex-wrap:nowrap;
+    align-items:center;
+}
 
-      .page-card {
-        background: white;
-        border-radius: 15px;
-        margin-top: 25px;
-        padding: 25px;
-        border: 1px solid #e2e8f0;
-      }
+.top-navbar .nav-link{
+    color:#475569 !important;
+    padding:10px 12px !important;
+    border-radius:14px;
+    font-size:13px;
+    font-weight:800;
+    white-space:nowrap;
+    transition:.3s;
+}
 
-      .page-title {
-        font-size: 35px;
-        font-weight: 700;
-      }
+.top-navbar .nav-link:hover,
+.top-navbar .nav-link.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white !important;
+}
 
-      .page-subtitle {
-        color: #666;
-        font-size: 14px;
-      }
+.logout-btn{
+    background:#fee2e2 !important;
+    color:#dc2626 !important;
+    padding:11px 18px !important;
+    border-radius:15px;
+    font-size:13px;
+    font-weight:900;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:.3s;
+}
 
-      .form-label {
-        font-weight: 600;
-      }
+.logout-btn:hover{
+    background:#dc2626 !important;
+    color:white !important;
+}
 
-      .form-control,
-      .form-select {
-        border-radius: 7px;
-      }
+.navbar-toggler{
+    border:none;
+    background:#eff6ff;
+    border-radius:14px;
+}
 
-      textarea {
-        resize: none;
-      }
+.navbar-toggler:focus{
+    box-shadow:none;
+}
 
-      .btn-save {
-        background: #172b4d;
-        color: white;
-      }
+/* MAIN CARD */
+.container-fluid{
+    width:94%;
+    margin:30px auto;
+    padding:0 !important;
+}
 
-      .btn-save:hover {
-        background: #0f1d36;
-        color: white;
-      }
+.page-card{
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:35px;
+    margin-top:0;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
+}
 
-      .back-btn {
-        border: 1px solid #cfd8dc;
-        background: white;
-        border-radius: 25px;
-        padding: 8px 20px;
-      }
+/* HEADER */
+.page-title{
+    font-size:42px;
+    font-weight:950;
+    color:#0f172a;
+}
 
-      .required {
-        color: red;
-      }
+.page-title i{
+    color:#2563eb;
+}
+
+.page-subtitle{
+    color:#64748b;
+    font-size:15px;
+    font-weight:700;
+    margin-top:8px;
+}
+
+.back-btn{
+    text-decoration:none;
+    background:white;
+    color:#475569;
+    border:1px solid #dbeafe;
+    padding:13px 22px;
+    border-radius:18px;
+    font-weight:900;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+}
+
+/* FORM */
+.form-label{
+    font-size:15px;
+    font-weight:900;
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.required{
+    color:#dc2626;
+}
+
+.form-control,
+.form-select{
+    border:1px solid #dbeafe;
+    border-radius:18px;
+    padding:14px 16px;
+    font-size:15px;
+    font-weight:700;
+    background:#f8fafc;
+    color:#334155;
+    transition:.3s;
+}
+
+.form-control{
+    min-height:52px;
+}
+
+.form-select{
+    height:52px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    background:white;
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+textarea.form-control{
+    min-height:260px;
+    resize:none;
+}
+
+/* BUTTONS */
+.btn-save{
+    border:none;
+    cursor:pointer;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    padding:14px 28px;
+    border-radius:18px;
+    font-size:15px;
+    font-weight:900;
+    transition:.3s;
+}
+
+.btn-save:hover{
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(37,99,235,.30);
+}
+
+.btn-secondary{
+    background:#fee2e2 !important;
+    color:#dc2626 !important;
+    border:1px solid #fecaca !important;
+    padding:14px 24px;
+    border-radius:18px;
+    font-weight:900;
+    transition:.3s;
+}
+
+.btn-secondary:hover{
+    background:#dc2626 !important;
+    color:white !important;
+}
+
+.text-muted{
+    color:#64748b !important;
+    font-weight:700;
+}
+
+/* RESPONSIVE */
+@media(max-width:1200px){
+    .top-navbar .navbar-nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        margin-top:12px;
+    }
+
+    .logout-btn{
+        margin-top:12px;
+        display:inline-block;
+    }
+}
+
+@media(max-width:768px){
+    .container-fluid{
+        width:96%;
+    }
+
+    .page-card{
+        padding:22px;
+    }
+
+    .page-title{
+        font-size:32px;
+    }
+
+    .page-card > .d-flex{
+        flex-direction:column;
+        gap:18px;
+    }
+
+    textarea.form-control{
+        min-height:220px;
+    }
+}
     </style>
   </head>
   <body>

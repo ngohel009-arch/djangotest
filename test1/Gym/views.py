@@ -149,6 +149,12 @@ def adminaddmember(request):
     tobj=trainer1.objects.all()
     return render(request,"adminaddmember.html",{'pobj':pobj,'tobj':tobj})
 
+def membersignup(request):
+    pobj=plan1.objects.all()
+    tobj=trainer1.objects.all()
+    return render(request, "membersignup.html", {'pobj':pobj, 'tobj':tobj})
+
+
 def addmember(request):
     xname = request.GET['username']
     xpass = request.GET['password']

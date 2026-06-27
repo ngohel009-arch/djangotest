@@ -18,6 +18,7 @@ urlpatterns=[
     path('admindashboard/', views.admindashboard, name='admindashboard'),
     path('adminmember/', views.adminmember, name='adminmember'),
     path('adminaddmember/', views.adminaddmember, name='adminaddmember'),
+    path('membersignup/', views.membersignup, name='membersignup'),
     path('admineditmember/<int:id>/', views.admineditmember, name='admineditmember'),
     path('update_member/<int:id>/', views.update_member, name='update_member'),
     path('admindeletemember/<int:id>/', views.admindeletemember, name='admindeletemember'),
