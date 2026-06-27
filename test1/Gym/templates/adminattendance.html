@@ -1,0 +1,291 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Attendance</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        background: #f4f7fb;
+        padding: 30px;
+      }
+
+      .main-card {
+        background: #fff;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Header */
+
+      .attendance-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+
+      .attendance-header h2 {
+        font-size: 40px;
+        color: #1f2937;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      .attendance-header p {
+        color: #6b7280;
+      }
+
+      .mark-btn {
+        background: #1f2937;
+        color: #fff;
+        text-decoration: none;
+        padding: 12px 18px;
+        border-radius: 10px;
+        font-weight: 500;
+      }
+
+      /* Filter Box */
+
+      .filter-box {
+        border: 1px solid #e5e7eb;
+        border-radius: 15px;
+        padding: 18px;
+        margin-bottom: 20px;
+      }
+
+      .filter-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 200px;
+        gap: 15px;
+        align-items: end;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+      }
+
+      .field input,
+      .field select {
+        width: 100%;
+        height: 45px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        padding: 0 12px;
+        font-size: 14px;
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .filter-btn,
+      .reset-btn {
+        height: 45px;
+        border: 1px solid #bdbdbd;
+        background: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 15px;
+        text-decoration: none;
+        color: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      /* Table */
+
+      .attendance-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .attendance-table th {
+        background: #f3f4f6;
+        padding: 16px;
+        text-align: left;
+        font-weight: 600;
+      }
+
+      .attendance-table td {
+        padding: 16px;
+        border-top: 1px solid #eee;
+      }
+
+      .member-name {
+        font-weight: 600;
+        color: #111827;
+      }
+
+      .member-user {
+        font-size: 13px;
+        color: #6b7280;
+        margin-top: 4px;
+      }
+
+      .date-cell {
+        color: #374151;
+      }
+
+      .time-badge {
+        background: #16a34a;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .empty-row {
+        text-align: center;
+        padding: 30px !important;
+        color: #6b7280;
+        font-size: 18px;
+      }
+
+      @media (max-width: 900px) {
+        .filter-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .attendance-header {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .attendance-header h2 {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-card">
+      <!-- Header -->
+
+      <div class="attendance-header">
+        <div>
+          <h2>
+            <i class="bi bi-calendar-check"></i>
+            Attendance {% if selected_date %} ({{ selected_date }}) {% endif %}
+          </h2>
+
+          <p>View and filter daily check-ins by date and member.</p>
+        </div>
+
+        <a href="{% url 'adminmarkattendance' %}" class="mark-btn">
+          <i class="bi bi-plus-lg"></i>
+          Mark Attendance
+        </a>
+      </div>
+
+      <!-- Filter Form -->
+
+      <form method="GET" class="filter-box">
+        <div class="filter-grid">
+          <div class="field">
+            <label>Date</label>
+
+            <input type="date" name="date" value="{{ selected_date }}" />
+          </div>
+
+          <div class="field">
+            <label>Member</label>
+
+            <select name="member">
+              <option value="">All Members</option>
+
+            {% for m in members %}
+                <option value="{{ m.mid }}"
+                    {% if selected_member == m.mid|stringformat:"s" %}selected{% endif %}>
+                    {{ m.mname }} (ID: {{ m.mid }})
+                </option>
+            {% endfor %}
+            </select>
+          </div>
+
+          <div class="buttons">
+            <button type="submit" class="filter-btn">
+              <i class="bi bi-funnel"></i>
+              Filter
+            </button>
+
+            <a href="{% url 'adminattendance' %}" class="reset-btn">
+                <i class="bi bi-arrow-counterclockwise"></i>
+                    Reset
+            </a>
+          </div>
+        </div>
+      </form>
+
+      <!-- Attendance Table -->
+
+      <table class="attendance-table">
+        <thead>
+          <tr>
+            <th width="50">#</th>
+            <th>Member</th>
+            <th>Date</th>
+            <th>Time In</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for att in attendance %}
+
+          <tr>
+            <td>{{ forloop.counter }}</td>
+
+            <td>
+              <div class="member-name">Member ID : {{ att.mid }}</div>
+            </td>
+
+            <td class="date-cell">
+              <i class="bi bi-calendar-event"></i>
+              {{ att.adate }}
+            </td>
+
+            <td>
+              <span class="time-badge">
+                <i class="bi bi-clock-fill"></i>
+                {{ att.atime }}
+              </span>
+            </td>
+          </tr>
+
+          {% empty %}
+
+          <tr>
+            <td colspan="4" class="empty-row">No Attendance Found</td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

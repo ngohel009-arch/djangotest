@@ -1,0 +1,421 @@
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My Workout / Diet Plans</title>
+
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+    <style>
+      *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
+    #f8fbff;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    width:94%;
+    margin:20px auto;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(15px);
+    border-radius:30px;
+    padding:18px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 15px 40px rgba(37,99,235,.10);
+    border:1px solid #e5e7eb;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:900;
+    color:#2563eb;
+}
+
+.menu{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#475569;
+    font-size:14px;
+    font-weight:800;
+    padding:10px 15px;
+    border-radius:14px;
+    transition:.3s;
+}
+
+.menu a:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:#fff;
+}
+
+.logout{
+    background:#fee2e2;
+    color:#dc2626 !important;
+    padding:10px 16px;
+    border-radius:14px;
+    font-weight:800;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.logout:hover{
+    background:#dc2626;
+    color:#fff !important;
+}
+
+/* ================= MAIN CARD ================= */
+
+.card{
+    width:94%;
+    margin:30px auto;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:35px;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
+}
+
+.title{
+    font-size:42px;
+    font-weight:900;
+    color:#0f172a;
+}
+
+.title i{
+    color:#2563eb;
+}
+
+.subtitle{
+    margin-top:8px;
+    margin-bottom:30px;
+    color:#64748b;
+    font-size:16px;
+    font-weight:600;
+}
+
+/* ================= PLAN CARD ================= */
+
+.plan-box{
+    width:100%;
+    margin-bottom:25px;
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid #e5e7eb;
+    box-shadow:0 10px 25px rgba(0,0,0,.05);
+    transition:.3s;
+}
+
+.plan-box:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 35px rgba(37,99,235,.10);
+}
+
+.plan-head{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:#fff;
+    padding:18px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:18px;
+    font-weight:800;
+}
+
+.date-badge{
+    background:#fff;
+    color:#2563eb;
+    padding:7px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:800;
+}
+
+.plan-body{
+    padding:24px;
+}
+
+.created{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:16px;
+    font-weight:700;
+}
+
+.desc{
+    color:#334155;
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.view-btn{
+    border:none;
+    cursor:pointer;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:#fff;
+    padding:11px 18px;
+    border-radius:14px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(37,99,235,.25);
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    z-index:999;
+}
+
+.modal-box{
+    width:720px;
+    max-width:95%;
+    margin:60px auto;
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 25px 50px rgba(0,0,0,.20);
+}
+
+.modal-header{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:#fff;
+    padding:20px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:24px;
+    font-weight:900;
+}
+
+.close-x{
+    cursor:pointer;
+    font-size:30px;
+}
+
+.modal-body{
+    padding:25px;
+}
+
+.modal-date{
+    color:#64748b;
+    font-size:15px;
+    font-weight:700;
+    padding-bottom:15px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.modal-desc{
+    margin-top:20px;
+    color:#334155;
+    font-size:16px;
+    line-height:1.8;
+}
+
+.modal-footer{
+    padding:20px;
+    text-align:right;
+}
+
+.close-btn{
+    border:none;
+    cursor:pointer;
+    background:#ef4444;
+    color:#fff;
+    padding:10px 18px;
+    border-radius:12px;
+    font-weight:800;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+    text-align:center;
+    padding:50px;
+    font-size:20px;
+    font-weight:700;
+    color:#64748b;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:992px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .menu{
+        justify-content:center;
+    }
+
+    .card{
+        width:96%;
+        padding:20px;
+    }
+
+    .title{
+        font-size:32px;
+    }
+
+    .plan-head{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="logo">🏋 My Gym</div>
+
+      <div class="menu">
+        <a href="/memberdashboard/"
+          ><i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+
+        <a href="/memberprofile/"
+          ><i class="bi bi-person-vcard"></i> My Profile
+        </a>
+
+        <a href="/memberbooking/"><i class="fa-solid fa-ticket"></i> Booking</a>
+
+        <a href="/membermembership/"
+          ><i class="fa-solid fa-crown"></i> Membership
+        </a>
+
+        <a href="/myattendance/"
+          ><i class="bi bi-calendar-check"></i> Attendance</a
+        >
+        <a href="/memberpayment/"><i class="bi bi-credit-card"></i> Payments</a>
+        <a href="/memberworkout/"
+          ><i class="bi bi-hospital"></i> Workout Plans</a
+        >
+        <a href="/memberfeedback/"
+          ><i class="bi bi-chat-left-fill"></i> Feedback</a
+        >
+      </div>
+
+      <a href="/logout/" class="logout">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="title">
+        <i class="bi bi-hospital"></i>
+        My Workout / Diet Plans
+      </div>
+
+      <div class="subtitle">
+        Workout and diet instructions assigned to you by the gym trainer/admin.
+      </div>
+
+      {% for w in plans %}
+
+      <div class="plan-box">
+        <div class="plan-head">
+          <span>
+            <i class="bi bi-file-earmark-text-fill"></i>
+            {{ w.wtitle }}
+          </span>
+
+          <span class="date-badge"> {{ w.wname }} </span>
+        </div>
+
+        <div class="plan-body">
+          <div class="created">
+            <i class="bi bi-person-fill"></i>
+            Assigned by: {{ w.wname }}
+          </div>
+
+          <div class="desc">{{ w.wdes|truncatechars:70 }}</div>
+
+          <button class="view-btn" onclick="openModal('{{ w.wid }}')">
+            <i class="bi bi-eye-fill"></i> View Full
+          </button>
+        </div>
+      </div>
+
+      <div class="modal" id="modal{{ w.wid }}">
+        <div class="modal-box">
+          <div class="modal-header">
+            <span>
+              <i class="bi bi-hospital"></i>
+              {{ w.wtitle }}
+            </span>
+
+            <span class="close-x" onclick="closeModal('{{ w.wid }}')">
+              &times;
+            </span>
+          </div>
+
+          <div class="modal-body">
+            <div class="modal-date">
+              <i class="bi bi-person-fill"></i>
+              {{ w.wname }}
+            </div>
+
+            <div class="modal-desc">{{ w.wdes }}</div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="close-btn" onclick="closeModal('{{ w.wid }}')">
+              <i class="bi bi-x-lg"></i> Close
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {% empty %}
+
+      <div class="empty">No Workout / Diet Plan Found</div>
+
+      {% endfor %}
+    </div>
+
+    <script>
+      function openModal(id) {
+        document.getElementById("modal" + id).style.display = "block";
+      }
+
+      function closeModal(id) {
+        document.getElementById("modal" + id).style.display = "none";
+      }
+    </script>
+  </body>
+</html>

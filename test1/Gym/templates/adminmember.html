@@ -1,0 +1,462 @@
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Members</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, #dbeafe 0%, transparent 30%),
+          radial-gradient(circle at bottom right, #cffafe 0%, transparent 30%),
+          #f8fbff;
+      }
+
+      /* NAVBAR */
+      .navbar {
+        width: 98%;
+        margin: 15px auto;
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: 900;
+        color: #2563eb;
+        min-width: 160px;
+      }
+
+      .menu {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .menu::-webkit-scrollbar {
+        display: none;
+      }
+
+      .menu a {
+        text-decoration: none;
+        color: #475569;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px 14px;
+        border: 1px solid #dbeafe;
+        border-radius: 14px;
+        background: #fff;
+        transition: 0.3s;
+        flex-shrink: 0;
+      }
+
+      .menu a:hover {
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+        color: #fff;
+      }
+
+      .logout-btn {
+        background: #fee2e2;
+        color: #dc2626;
+        padding: 10px 14px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 700;
+        border: 1px solid #fecaca;
+        flex-shrink: 0;
+      }
+
+      .logout-btn:hover {
+        background: #dc2626;
+        color: #fff;
+      }
+
+      /* MAIN */
+      .container {
+        width: 94%;
+        margin: 30px auto;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(15px);
+        border-radius: 35px;
+        padding: 32px;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+        border: 1px solid #e5e7eb;
+      }
+
+      /* HEADER */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .header h2 {
+        font-size: 42px;
+        font-weight: 950;
+        color: #0f172a;
+      }
+
+      .header h2 i {
+        color: #2563eb;
+      }
+
+      .header small {
+        color: #64748b;
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .add-btn {
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+        color: #fff;
+        padding: 13px 22px;
+        border-radius: 18px;
+        text-decoration: none;
+        font-weight: 900;
+        transition: 0.3s;
+      }
+
+      .add-btn:hover {
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.3);
+      }
+
+      /* SEARCH */
+      .search-area {
+        margin: 25px 0;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        background: #f8fafc;
+        padding: 18px;
+        border-radius: 24px;
+        border: 1px solid #e5e7eb;
+      }
+
+      .search-area input {
+        width: 380px;
+        max-width: 100%;
+        padding: 14px 18px;
+        border: 1px solid #dbeafe;
+        border-radius: 18px;
+        outline: none;
+        font-size: 15px;
+        font-weight: 700;
+        background: white;
+      }
+
+      .search-area input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+      }
+
+      .search-area button {
+        padding: 14px 25px;
+        border: none;
+        border-radius: 18px;
+        background: #2563eb;
+        color: white;
+        font-weight: 900;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .search-area button:hover {
+        background: #06b6d4;
+        transform: translateY(-2px);
+      }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 24px;
+      }
+
+      thead {
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+      }
+
+      th {
+        color: white;
+        text-align: left;
+        padding: 17px;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      td {
+        padding: 17px;
+        border-bottom: 1px solid #edf2f7;
+        font-size: 15px;
+        color: #334155;
+        font-weight: 700;
+        background: white;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: #f8fbff;
+      }
+
+      tbody tr:hover td {
+        background: #eff6ff;
+      }
+
+      .member-role {
+        font-size: 13px;
+        color: #64748b;
+        margin-top: 5px;
+        font-weight: 700;
+      }
+
+      /* BADGES */
+      .badge {
+        background: #dcfce7;
+        color: #16a34a;
+        padding: 7px 13px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 900;
+        display: inline-block;
+      }
+
+      .bg-secondary {
+        background: #dbeafe !important;
+        color: #2563eb !important;
+      }
+
+      /* ACTION BUTTONS */
+      .action-btns {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .edit-btn,
+      .delete-btn {
+        padding: 8px 14px;
+        border-radius: 18px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 900;
+        transition: 0.3s;
+      }
+
+      .edit-btn {
+        color: #f59e0b;
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+      }
+
+      .edit-btn:hover {
+        background: #f59e0b;
+        color: #fff;
+      }
+
+      .delete-btn {
+        color: #dc2626;
+        background: #fee2e2;
+        border: 1px solid #fecaca;
+      }
+
+      .delete-btn:hover {
+        background: #dc2626;
+        color: #fff;
+      }
+
+      /* MOBILE */
+      @media (max-width: 992px) {
+        .navbar {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .menu {
+          width: 100%;
+          justify-content: flex-start;
+        }
+
+        .card {
+          padding: 22px;
+          overflow-x: auto;
+        }
+
+        table {
+          min-width: 900px;
+        }
+
+        .header h2 {
+          font-size: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="logo">🏋 My Gym</div>
+
+      <div class="menu">
+        <a href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a href="#"><i class="bi bi-people"></i> Members</a>
+        <a href="#"><i class="bi bi-file-text"></i> Plans</a>
+        <a href="#"><i class="bi bi-person-badge"></i> Trainers</a>
+        <a href="#"><i class="bi bi-credit-card"></i> Payments</a>
+        <a href="#"><i class="bi bi-calendar-check"></i> Attendance</a>
+        <a href="#"><i class="bi bi-tools"></i> Equipment</a>
+        <a href="#"><i class="bi bi-question-circle"></i> Enquiries</a>
+        <a href="#"><i class="bi bi-heart-pulse"></i> Workout Plans</a>
+        <a href="#"><i class="bi bi-star"></i> Feedbacks</a>
+      </div>
+
+      <a href="#" class="logout-btn">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+    </nav>
+
+    <div class="container">
+      <div class="card">
+        <div class="header">
+          <div>
+            <h2>
+              <i class="bi bi-people-fill"></i>
+              Members
+            </h2>
+            <small>Manage gym members, plans, and profiles.</small>
+          </div>
+
+          <a href="{% url 'adminaddmember' %}" class="add-btn">
+            <i class="bi bi-person-plus-fill"></i>
+            Add Member
+          </a>
+        </div>
+
+        <form method="GET">
+          <div class="search-area">
+            <input
+              type="text"
+              name="q"
+              placeholder="Search by name or username..."
+            />
+
+            <button type="submit">
+              <i class="bi bi-funnel-fill"></i>
+              Search
+            </button>
+          </div>
+        </form>
+
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Username</th>
+              <th>Mobile</th>
+              <th>Password</th>
+              <th>Join Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for member in members %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+
+              <td>
+                <strong>{{ member.mname }}</strong>
+                <div class="member-role">
+                  <i class="bi bi-file-person"></i>
+                  Member
+                </div>
+              </td>
+
+              <td>
+                <span class="badge bg-secondary"> {{ member.mname }} </span>
+              </td>
+
+              <td>
+                <i class="bi bi-telephone-fill"></i>
+                {{ member.mmobile }}
+              </td>
+
+              <td>
+                <span class="badge"> {{ member.mpass }} </span>
+              </td>
+
+              <td>
+                <i class="bi bi-calendar-event"></i>
+                {{ member.mtime }}
+              </td>
+
+              <td>
+                <div class="action-btns">
+                  <a href="/admineditmember/{{ member.mid }}/" class="edit-btn">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </a>
+
+                  <a
+                    href="/admindeletemember/{{ member.mid }}/"
+                    class="delete-btn"
+                    onclick="
+                      return confirm(
+                        'Are you sure you want to delete this member?',
+                      );
+                    "
+                  >
+                    <i class="bi bi-trash-fill"></i>
+                    Delete
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% empty %}
+
+            <tr>
+              <td colspan="7">No members found.</td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

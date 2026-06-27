@@ -1,0 +1,648 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Member</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
+    #f8fbff;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    width:96%;
+    margin:18px auto;
+    padding:15px 22px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 12px 30px rgba(37,99,235,.10);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:900;
+    color:#2563eb;
+    white-space:nowrap;
+}
+
+.menu{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    flex-wrap:nowrap;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#475569;
+    padding:10px 14px;
+    border-radius:14px;
+    font-size:13px;
+    font-weight:800;
+    white-space:nowrap;
+    transition:.3s;
+}
+
+.menu a i{
+    margin-right:5px;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+}
+
+.logout-btn{
+    background:#fee2e2;
+    color:#dc2626;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:15px;
+    font-size:14px;
+    font-weight:900;
+    white-space:nowrap;
+    transition:.3s;
+}
+
+.logout-btn:hover{
+    background:#dc2626;
+    color:white;
+}
+
+/* Tablet */
+
+@media(max-width:1400px){
+
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .menu{
+        width:100%;
+        justify-content:flex-start;
+        flex-wrap:wrap;
+    }
+
+    .logout-btn{
+        align-self:flex-end;
+    }
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .navbar{
+        width:98%;
+        padding:15px;
+    }
+
+    .logo{
+        font-size:26px;
+    }
+
+    .menu{
+        gap:8px;
+    }
+
+    .menu a{
+        width:48%;
+        text-align:center;
+    }
+
+    .logout-btn{
+        width:100%;
+        text-align:center;
+    }
+}
+/* ================= PAGE ================= */
+
+.container{
+    width:96%;
+    margin:30px auto;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:42px;
+    font-weight:900;
+    color:#0f172a;
+}
+
+.page-title i{
+    color:#2563eb;
+}
+
+.page-title p{
+    margin-top:8px;
+    color:#64748b;
+    font-size:15px;
+    font-weight:600;
+}
+
+.back-btn{
+    text-decoration:none;
+    background:white;
+    color:#475569;
+    border:1px solid #dbeafe;
+    padding:13px 22px;
+    border-radius:18px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+}
+
+/* ================= MAIN CARD ================= */
+
+.card{
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(18px);
+    border-radius:35px;
+    padding:35px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 18px 45px rgba(15,23,42,.08);
+}
+
+/* ================= SECTION ================= */
+
+.section{
+    background:#fff;
+    border-radius:25px;
+    border:1px solid #e5e7eb;
+    padding:28px;
+    margin-bottom:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.section h3{
+    font-size:24px;
+    font-weight:900;
+    color:#0f172a;
+    margin-bottom:8px;
+}
+
+.section h3 i{
+    color:#2563eb;
+}
+
+.section-subtitle{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+/* ================= GRID ================= */
+
+.row-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.row-3{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:22px;
+}
+
+.field{
+    margin-bottom:18px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight:800;
+    color:#0f172a;
+}
+
+.field span{
+    color:red;
+}
+
+/* ================= INPUTS ================= */
+
+.input-box{
+    display:flex;
+    align-items:center;
+    background:#f8fafc;
+    border:1px solid #dbeafe;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.input-box:focus-within{
+    border-color:#2563eb;
+    background:white;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.input-box i{
+    width:52px;
+    text-align:center;
+    color:#2563eb;
+    font-size:18px;
+}
+
+.input-box input,
+.input-box textarea{
+    width:100%;
+    border:none;
+    outline:none;
+    background:transparent;
+    padding:15px;
+    font-size:15px;
+    font-weight:600;
+}
+
+select{
+    width:100%;
+    border:1px solid #dbeafe;
+    background:#f8fafc;
+    padding:15px;
+    border-radius:18px;
+    outline:none;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+
+select:focus{
+    background:white;
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+textarea{
+    resize:none;
+    min-height:100px;
+}
+
+/* ================= BUTTONS ================= */
+
+.actions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-top:25px;
+}
+
+.btn-save{
+    border:none;
+    cursor:pointer;
+    padding:15px 30px;
+    border-radius:18px;
+    font-size:15px;
+    font-weight:900;
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    transition:.3s;
+}
+
+.btn-save:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(37,99,235,.25);
+}
+
+.btn-cancel{
+    text-decoration:none;
+    background:#fee2e2;
+    color:#dc2626;
+    padding:15px 28px;
+    border-radius:18px;
+    font-weight:900;
+    transition:.3s;
+}
+
+.btn-cancel:hover{
+    background:#dc2626;
+    color:white;
+}
+
+.note{
+    margin-top:18px;
+    color:#64748b;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:992px){
+
+    .navbar{
+        flex-direction:column;
+        gap:18px;
+    }
+
+    .menu{
+        justify-content:center;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:18px;
+    }
+
+    .row-2,
+    .row-3{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:22px;
+    }
+
+    .section{
+        padding:20px;
+    }
+
+    .page-title h1{
+        font-size:34px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🏋 My Gym
+    </div>
+
+    <div class="menu">
+        <a href="#">Dashboard</a>
+        <a href="#">Members</a>
+        <a href="#">Plans</a>
+        <a href="#">Trainers</a>
+        <a href="#">Payments</a>
+        <a href="#">Attendance</a>
+        <a href="#">Equipment</a>
+        <a href="#">Enquiries</a>
+        <a href="#">Workout Plans</a>
+        <a href="#">Feedbacks</a>
+    </div>
+
+    <a href="#" class="logout-btn">
+        Logout
+    </a>
+
+</nav>
+
+<div class="container">
+
+    <div class="page-header">
+
+        <div class="page-title">
+            <h1>
+                <i class="bi bi-person-plus-fill"></i>
+                Add Member
+            </h1>
+            <p>Create a new member profile and assign plan/trainer if needed.</p>
+        </div>
+
+        <a href="{% url 'adminmember' %}" class="back-btn">
+            <i class="bi bi-arrow-left"></i>
+            Back to Members
+        </a>
+
+    </div>
+
+    <form method="GET" action="/addmember">
+        {% csrf_token %}
+
+        <div class="card">
+
+            <!-- LOGIN -->
+
+            <div class="section">
+
+                <h3>
+                    <i class="bi bi-key-fill"></i>
+                    Login Credentials
+                </h3>
+
+                <div class="row-2">
+
+                    <div class="field">
+                        <label>Username <span>*</span></label>
+
+                        <div class="input-box">
+                            <i class="bi bi-person"></i>
+                            <input type="text"
+                                   placeholder="e.g. rahul123"
+                                   name="username">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Password <span>*</span></label>
+
+                        <div class="input-box">
+                            <i class="bi bi-lock-fill"></i>
+                            <input type="password"
+                                   placeholder="Create a strong password"
+                                   name="password">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- BASIC INFO -->
+
+            <div class="section">
+
+                <h3>
+                    <i class="bi bi-card-text"></i>
+                    Basic Information
+                </h3>
+
+                <p class="section-subtitle">
+                    Personal details of the member.
+                </p>
+
+                <div class="row-3">
+
+                    <div class="field">
+                        <label>Full Name *</label>
+
+                        <div class="input-box">
+                            <i class="bi bi-person-vcard"></i>
+                            <input type="text"
+                                   placeholder="e.g. Rahul Sharma"
+                                   name="fullname">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Mobile</label>
+
+                        <div class="input-box">
+                            <i class="bi bi-telephone"></i>
+                            <input type="text"
+                                   placeholder="e.g. 1234******"
+                                   name="mobile">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Age</label>
+
+                        <div class="input-box">
+                            <i class="bi bi-hash"></i>
+                            <input type="number" name="age">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row-2">
+
+                    <div class="field">
+                        <label>Gender</label>
+
+                        <select name="gender">
+                            <option>Select</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Join Date</label>
+                        <input type="date" name="date">
+                    </div>
+
+                </div>
+
+                <div class="field">
+
+                    <label>Address</label>
+
+                    <div class="input-box">
+                        <i class="bi bi-geo-alt"></i>
+                        <textarea placeholder="House no, area, city..." name="address"></textarea>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- MEMBERSHIP -->
+
+            <div class="section">
+
+                <h3>
+                    <i class="bi bi-award-fill"></i>
+                    Membership & Trainer Assignment
+                </h3>
+
+                <p class="section-subtitle">
+                    Optional — you can assign later as well.
+                </p>
+
+                <div class="row-2">
+
+                    <div class="field">
+
+                        <label>Membership Plan</label>
+                        <select name="plan">
+                        <option>no plan</option>
+                        {% for i in pobj %}
+                            <option>{{i.pname}}</option>
+                        {% endfor %}
+                        </select>
+
+                    </div>
+
+                    <div class="field">
+
+                        <label>Trainer</label>
+
+                        <select name="trainer">
+                        <option>no trainer</option>
+                        {% for i in tobj %}
+                            <option>{{i.tname}}</option>
+                        {% endfor %}
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button type="submit" class="btn-save">
+                    <i class="bi bi-save-fill"></i>
+                    Save Member
+                </button>
+
+                <a href="#" class="btn-cancel">
+                    Cancel
+                </a>
+
+            </div>
+
+            <p class="note">
+                Fields marked with * are mandatory.
+            </p>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

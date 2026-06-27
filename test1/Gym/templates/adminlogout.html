@@ -1,0 +1,23 @@
+<a href="javascript:void(0);" onclick="adminLogout()" class="logout">
+    <i class="bi bi-box-arrow-right"></i> Logout
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+function adminLogout() {
+    Swal.fire({
+        title: "Logout?",
+        text: "Do you want to logout from Admin Panel?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, Logout"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "/adminlogout/";
+        }
+    });
+}
+</script>

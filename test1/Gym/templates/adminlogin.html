@@ -1,0 +1,411 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Gym - Admin Login</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
+    #f8fbff;
+}
+
+/* NAVBAR */
+.navbar{
+    width:94%;
+    margin:20px auto;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(15px);
+    border-radius:30px;
+    padding:18px 28px;
+    height:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 15px 40px rgba(37,99,235,.10);
+    border:1px solid #e5e7eb;
+}
+
+.logo{
+    color:#2563eb;
+    font-size:30px;
+    font-weight:950;
+}
+
+.nav-buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-btn{
+    text-decoration:none;
+    color:#475569;
+    background:white;
+    padding:11px 18px;
+    border-radius:16px;
+    font-size:14px;
+    font-weight:900;
+    border:1px solid #dbeafe;
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(37,99,235,.25);
+}
+
+/* MAIN */
+.main-container{
+    width:94%;
+    margin:30px auto;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:35px;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
+}
+
+/* LOGIN CARD */
+.login-card{
+    max-width:1050px;
+    margin:auto;
+    background:white;
+    border-radius:32px;
+    overflow:hidden;
+    display:flex;
+    box-shadow:0 20px 45px rgba(15,23,42,.12);
+    border:1px solid #e5e7eb;
+}
+
+/* LEFT */
+.left-section{
+    width:50%;
+    padding:40px;
+}
+
+.card-header{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    padding:22px;
+    border-radius:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.card-header h3{
+    font-size:24px;
+    font-weight:950;
+}
+
+.card-header p{
+    font-size:14px;
+    margin-top:5px;
+    color:#ecfeff;
+    font-weight:600;
+}
+
+.home-btn{
+    text-decoration:none;
+    color:#2563eb;
+    background:white;
+    padding:10px 16px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:900;
+    transition:.3s;
+}
+
+.home-btn:hover{
+    background:#eff6ff;
+    color:#1d4ed8;
+}
+
+/* FORM */
+.form-group{
+    margin-top:22px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:900;
+    color:#0f172a;
+}
+
+.input-box{
+    display:flex;
+    align-items:center;
+    border:1px solid #dbeafe;
+    border-radius:18px;
+    overflow:hidden;
+    background:#f8fafc;
+    transition:.3s;
+}
+
+.input-box:focus-within{
+    background:white;
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.input-box i{
+    padding:15px;
+    color:#2563eb;
+}
+
+.input-box input{
+    width:100%;
+    border:none;
+    outline:none;
+    padding:15px;
+    background:transparent;
+    font-size:15px;
+    font-weight:700;
+}
+
+.login-btn{
+    width:100%;
+    margin-top:25px;
+    border:none;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    padding:15px;
+    border-radius:18px;
+    font-size:16px;
+    font-weight:950;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(37,99,235,.35);
+}
+
+.footer-note{
+    text-align:center;
+    margin-top:18px;
+    color:#64748b;
+    font-size:14px;
+    font-weight:700;
+    background:#f8fafc;
+    padding:13px;
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+}
+
+/* RIGHT */
+.right-section{
+    width:50%;
+    position:relative;
+    min-height:520px;
+}
+
+.right-section img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    padding:35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    color:white;
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.35),
+        rgba(6,182,212,.25),
+        rgba(15,23,42,.75)
+    );
+}
+
+.overlay h2{
+    margin-bottom:10px;
+    font-size:34px;
+    font-weight:950;
+}
+
+.overlay p{
+    font-size:16px;
+    line-height:1.6;
+    font-weight:600;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .login-card{
+        flex-direction:column;
+    }
+
+    .left-section,
+    .right-section{
+        width:100%;
+    }
+
+    .right-section{
+        height:320px;
+        min-height:320px;
+    }
+
+    .main-container{
+        width:96%;
+        padding:20px;
+    }
+
+    .left-section{
+        padding:24px;
+    }
+
+    .card-header{
+        flex-direction:column;
+        gap:12px;
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+
+    <div class="logo">
+        🏋 My Gym
+    </div>
+
+    <div class="nav-buttons">
+        <a href="{% url 'adminlogin' %}" class="nav-btn">
+            <i class="fa-solid fa-user-shield"></i>
+            Admin Login
+        </a>
+
+        <a href="{% url 'memberlogin' %}" class="nav-btn">
+            <i class="fa-solid fa-user"></i>
+            Member Login
+        </a>
+    </div>
+
+</nav>
+
+<!-- Main Section -->
+<div class="main-container">
+
+    <div class="login-card">
+
+        <!-- Left -->
+        <div class="left-section">
+
+            <div class="card-header">
+                <div>
+                    <h3>
+                        <i class="fa-solid fa-user-shield"></i>
+                        Admin Login
+                    </h3>
+                    <p>Sign in to manage the gym</p>
+                </div>
+
+                <a href="{% url 'home' %}" class="home-btn">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </a>
+            </div>
+
+            <form method="GET" action="/adminlogin1">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Username</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-user"></i>
+
+                        <input type="text"
+                               name="username"
+                               placeholder="Enter admin username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password"
+                               name="password"
+                               placeholder="Enter password">
+
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Login
+                </button>
+
+                <div class="footer-note">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Admin access only
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- Right -->
+        <div class="right-section">
+
+            <!-- Replace with your image -->
+            <img src="{% static 'images/gym-admin.jpg' %}" alt="Gym">
+
+            <div class="overlay">
+                <h2>
+                    <i class="fa-solid fa-dumbbell"></i>
+                    My.Gym Admin
+                </h2>
+
+                <p>
+                    Manage members, plans, payments,
+                    attendance and more — in one place.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

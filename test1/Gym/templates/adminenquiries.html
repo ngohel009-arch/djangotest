@@ -1,0 +1,270 @@
+<!-- adminenquiries.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enquiries</title>
+
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #dff7f7, #eef3ff);
+        }
+
+        .navbar {
+            height: 55px;
+            background: #142033;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 18px;
+            gap: 22px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .navbar a {
+            color: #cfd8e3;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .logout {
+            margin-left: auto;
+            background: #3b1f2b;
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: white !important;
+        }
+
+        .card {
+            width: 90%;
+            margin: 35px auto;
+            background: white;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .table-box {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            font-size: 14px;
+            color: black;
+        }
+
+        td {
+            padding: 12px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .badge {
+            background: #22c55e;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 10px;
+            border: 2px solid #c7d2fe;
+        }
+
+        .update-btn {
+            background: #111827;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background: #000;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo"><i class="bi bi-gem"></i> My.Gym</div>
+
+    <a href="#">Dashboard</a>
+    <a href="#">Members</a>
+    <a href="#">Plans</a>
+    <a href="#">Trainers</a>
+    <a href="#">Payments</a>
+    <a href="#">Attendance</a>
+    <a href="#">Equipment</a>
+    <a href="#">Enquiries</a>
+    <a href="#">Workout Plans</a>
+    <a href="#">Feedbacks</a>
+
+    <a href="#" class="logout">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+</div>
+
+<div class="card">
+    <h2><i class="bi bi-question-circle-fill"></i> Enquiries</h2>
+    <div class="subtitle">Track incoming enquiries and update their status.</div>
+
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Message</th>
+                    <th>Created</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+{% for enquiry in enquiries %}
+
+<tr>
+
+    <td>
+        <strong>{{ enquiry.name }}</strong>
+    </td>
+
+    <td>
+        <i class="bi bi-envelope-fill"></i>
+        {{ enquiry.email }}
+    </td>
+
+    <td>
+        <i class="bi bi-telephone-fill"></i>
+        {{ enquiry.mobile }}
+    </td>
+
+    <td>
+        {{ enquiry.message }}
+    </td>
+
+    <td>
+        <i class="bi bi-calendar-event"></i>
+        {{ enquiry.created }}
+    </td>
+
+    <td>
+
+        {% if enquiry.status == "Resolved" %}
+
+            <span style="background:#22c55e;color:white;padding:6px 12px;border-radius:20px;">
+                Resolved
+            </span>
+
+        {% elif enquiry.status == "Seen" %}
+
+            <span style="background:#3b82f6;color:white;padding:6px 12px;border-radius:20px;">
+                Seen
+            </span>
+
+        {% else %}
+
+            <span style="background:#f59e0b;color:white;padding:6px 12px;border-radius:20px;">
+                New
+            </span>
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        <form method="POST" action="/updateenquiry/{{ enquiry.id }}/">
+            {% csrf_token %}
+
+            <select name="status">
+
+                <option value="New"
+                {% if enquiry.status == "New" %}selected{% endif %}>
+                New
+                </option>
+
+                <option value="Seen"
+                {% if enquiry.status == "Seen" %}selected{% endif %}>
+                Seen
+                </option>
+
+                <option value="Resolved"
+                {% if enquiry.status == "Resolved" %}selected{% endif %}>
+                Resolved
+                </option>
+
+            </select>
+
+            <button type="submit" class="update-btn">
+                <i class="bi bi-arrow-repeat"></i>
+                Update
+            </button>
+
+        </form>
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="7" class="no-data">
+        No Enquiries Found
+    </td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

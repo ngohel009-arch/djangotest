@@ -1,0 +1,633 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gym Dashboard</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#dbeafe 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
+    #f8fbff;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    width:98%;
+    margin:15px auto;
+    background:#ffffff;
+    border-radius:22px;
+    padding:15px 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.nav-link{
+    color:#475569 !important;
+    padding:11px 17px !important;
+    border-radius:16px;
+    font-weight:850;
+    transition:.3s;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white !important;
+    box-shadow:0 10px 22px rgba(37,99,235,.28);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    font-size:22px;
+    font-weight:900;
+    color:#2563eb;
+    min-width:160px;
+}
+
+.menu{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+
+    /* Keep all items in one line */
+    flex-wrap:nowrap;
+    white-space:nowrap;
+    overflow-x:auto;
+
+    scrollbar-width:none;
+}
+
+.menu::-webkit-scrollbar{
+    display:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#475569;
+    font-size:14px;
+    font-weight:700;
+    padding:10px 14px;
+    border:1px solid #dbeafe;
+    border-radius:14px;
+    background:#fff;
+    transition:.3s;
+    flex-shrink:0;
+}
+
+.menu a:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:#fff;
+}
+
+.logout-btn{
+    background:#fee2e2;
+    color:#dc2626;
+    padding:10px 14px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:700;
+    border:1px solid #fecaca;
+}
+
+.logout-btn:hover{
+    background:#dc2626;
+    color:white;
+}
+
+/* CONTAINER */
+.container{
+    width:94%;
+    margin:30px auto;
+}
+
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    border-radius:35px;
+    padding:45px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 18px 45px rgba(37,99,235,.22);
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::after{
+    content:"GYM";
+    position:absolute;
+    right:35px;
+    bottom:-35px;
+    font-size:120px;
+    font-weight:950;
+    color:rgba(255,255,255,.12);
+}
+
+.hero small,
+.hero h1,
+.hero p,
+.hero-actions{
+    position:relative;
+    z-index:2;
+}
+
+.hero small{
+    font-weight:800;
+    color:#ecfeff;
+}
+
+.hero h1{
+    margin:10px 0;
+    font-size:48px;
+    font-weight:950;
+}
+
+.hero p{
+    color:#ecfeff;
+    font-weight:600;
+}
+
+.hero-actions{
+    display:flex;
+    gap:12px;
+}
+
+.btn-white{
+    background:white;
+    color:#2563eb;
+    border:none;
+    padding:14px 22px;
+    border-radius:18px;
+    cursor:pointer;
+    font-weight:950;
+}
+
+.btn-outline{
+    background:rgba(255,255,255,.15);
+    color:white;
+    border:1px solid rgba(255,255,255,.55);
+    padding:14px 22px;
+    border-radius:18px;
+    cursor:pointer;
+    font-weight:950;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    margin-top:28px;
+}
+
+.card{
+    border-radius:30px;
+    padding:28px;
+    color:white;
+    position:relative;
+    min-height:175px;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    transition:.3s;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 25px 55px rgba(37,99,235,.20);
+}
+
+.card h2{
+    font-size:54px;
+    font-weight:950;
+    margin-top:5px;
+}
+
+.card p{
+    margin-top:8px;
+    font-weight:600;
+}
+
+.card small{
+    font-weight:900;
+    opacity:.95;
+}
+
+.card-icon{
+    position:absolute;
+    right:22px;
+    top:22px;
+    width:58px;
+    height:58px;
+    border-radius:18px;
+    background:rgba(255,255,255,.22);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+}
+
+.card-btn{
+    display:inline-block;
+    margin-top:18px;
+    background:white;
+    color:#2563eb;
+    border:none;
+    padding:10px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:900;
+    text-decoration:none;
+}
+
+.blue{ background:linear-gradient(135deg,#2563eb,#06b6d4); }
+.green{ background:linear-gradient(135deg,#16a34a,#22c55e); }
+.purple{ background:linear-gradient(135deg,#7c3aed,#a855f7); }
+.orange{ background:linear-gradient(135deg,#f97316,#f59e0b); }
+
+/* QUICK ACCESS */
+.section{
+    margin-top:38px;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:35px;
+    padding:32px;
+    box-shadow:0 18px 45px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.section-header h2{
+    font-size:36px;
+    font-weight:950;
+    color:#0f172a;
+}
+
+.section-header span{
+    color:#64748b;
+    font-weight:700;
+}
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.quick-card{
+    background:white;
+    border-radius:24px;
+    padding:22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 25px rgba(15,23,42,.08);
+    border:1px solid #e5e7eb;
+    transition:.3s;
+}
+
+.quick-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 35px rgba(37,99,235,.12);
+}
+
+.left{
+    display:flex;
+    gap:16px;
+    align-items:center;
+}
+
+.icon-box{
+    width:54px;
+    height:54px;
+    border-radius:17px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:white;
+    color:#2563eb;
+    box-shadow:0 5px 14px rgba(0,0,0,.08);
+    font-size:22px;
+}
+
+.quick-card h4{
+    margin-bottom:5px;
+    color:#0f172a;
+    font-weight:900;
+}
+
+.quick-card p{
+    color:#64748b;
+    font-size:13px;
+    font-weight:700;
+}
+
+.arrow{
+    font-size:30px;
+    color:#2563eb;
+    font-weight:900;
+}
+
+.bg1{background:#eff6ff;}
+.bg2{background:#ecfdf5;}
+.bg3{background:#f5f3ff;}
+.bg4{background:#fff7ed;}
+.bg5{background:#ecfeff;}
+.bg6{background:#f0fdfa;}
+.bg7{background:#fdf2f8;}
+.bg8{background:#fff1f2;}
+.bg9{background:#eff6ff;}
+
+@media(max-width:992px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+    }
+
+    .menu{
+        width:100%;
+        justify-content:center;
+    }
+
+    .menu a{
+        padding:9px 14px;
+        font-size:13px;
+    }
+}
+
+@media(max-width:576px){
+
+    .logo{
+        font-size:24px;
+    }
+
+    .menu{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .menu a{
+        width:100%;
+        text-align:center;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+    <div class="logo">
+        🏋 My Gym
+    </div>
+
+    <div class="menu">
+        <a class="nav-link active" href="{% url 'admindashboard' %}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a href="{% url 'adminmember' %}"><i class="bi bi-people"></i> Members</a>
+        <a href="{% url 'adminplan' %}"><i class="bi bi-file-text"></i> Plans</a>
+        <a href="{% url 'admintrainers' %}"><i class="bi bi-person-badge"></i> Trainers</a>
+        <a href="{% url 'adminpayment' %}"><i class="bi bi-credit-card"></i> Payments</a>
+        <a href="{% url 'adminattendance' %}"><i class="bi bi-calendar-check"></i> Attendance</a>
+        <a href="{% url 'adminequipment' %}"><i class="bi bi-tools"></i> Equipment</a>
+        <a href="{% url 'adminenquiries' %}"><i class="bi bi-question-circle"></i> Enquiries</a>
+        <a href="{% url 'adminworkoutplans' %}"><i class="bi bi-heart-pulse"></i> Workout Plans</a>
+        <a href="{% url 'adminfeedback' %}"><i class="bi bi-star"></i> Feedbacks</a>
+    </div>
+
+    <a href="{% url 'adminlogout' %}" class="logout-btn">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+
+</nav>
+
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+
+        <div>
+            <small>Admin Dashboard</small>
+            <h1>Overview & Controls</h1>
+            <p>
+                Manage members, memberships, registrations,
+                payments, attendance and more.
+            </p>
+        </div>
+
+        <div class="hero-actions">
+            <a href="{% url 'adminaddmember' %}"><button class="btn-white">
+                <i class="bi bi-person-plus"></i>
+                Add Member
+            </button></a>
+
+            <button class="btn-outline">
+                <i class="bi bi-credit-card"></i>
+                Record Payment
+            </button>
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+
+        <div class="card blue">
+            <div class="card-icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+
+            <small>Total Members</small>
+            <h2>{{ total_members }}</h2>
+            <p>All registered members</p>
+            
+            <button class="card-btn">Manage</button>
+        </div>
+
+        <div class="card green">
+            <div class="card-icon">
+                <i class="bi bi-award-fill"></i>
+            </div>
+
+            <small>Active Memberships</small>
+            <h2>{{ total_plans }}</h2>
+            <p>Currently active plans</p>
+
+            <button class="card-btn">Plans</button>
+        </div>
+
+        <div class="card purple">
+            <div class="card-icon">
+                <i class="bi bi-calendar-event"></i>
+            </div>
+
+            <small>Today Registrations</small>
+            <h2>{{ today_registrations }}</h2>
+            <p>New signups today</p>
+
+            <button class="card-btn">View</button>
+        </div>
+
+        <div class="card orange">
+            <div class="card-icon">
+                <i class="bi bi-clock-fill"></i>
+            </div>
+
+            <small>Pending Payments</small>
+            <h2>{{ pending_enquiries }}</h2>
+            <p>Require follow-up</p>
+
+            <button class="card-btn">Payments</button>
+        </div>
+
+    </div>
+
+    <!-- QUICK ACCESS -->
+
+    <div class="section">
+
+        <div class="section-header">
+            <h2>⚡ Quick Access</h2>
+            <span>Jump to frequently used modules.</span>
+        </div>
+
+        <div class="quick-grid">
+
+            <div class="quick-card bg1">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-people"></i></div>
+                    <div>
+                        <h4>Manage Members</h4>
+                        <p>Add, edit, search</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="quick-card bg2">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-award"></i></div>
+                    <div>
+                        <h4>Membership Plans</h4>
+                        <p>Fee, duration</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="quick-card bg3">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-person-badge"></i></div>
+                    <div>
+                        <h4>Trainers</h4>
+                        <p>Profiles, shifts</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="quick-card bg4">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-credit-card"></i></div>
+                    <div>
+                        <h4>Payments</h4>
+                        <p>Paid/Pending</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="quick-card bg5">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-calendar-check"></i></div>
+                    <div>
+                        <h4>Attendance</h4>
+                        <p>Daily check-ins</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="quick-card bg6">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-tools"></i></div>
+                    <div>
+                        <h4>Equipment</h4>
+                        <p>Inventory</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="quick-card bg7">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-question-circle"></i></div>
+                    <div>
+                        <h4>Enquiries</h4>
+                        <p>New/Seen/Resolved</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="quick-card bg8">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-heart-pulse"></i></div>
+                    <div>
+                        <h4>Workout Plans</h4>
+                        <p>Create & manage</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="quick-card bg9">
+                <div class="left">
+                    <div class="icon-box"><i class="bi bi-star"></i></div>
+                    <div>
+                        <h4>Feedbacks</h4>
+                        <p>Member feedback list</p>
+                    </div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

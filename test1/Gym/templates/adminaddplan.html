@@ -1,0 +1,380 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Membership Plan</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#eef3f7;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    background:#16233a;
+    color:white;
+    height:60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 20px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.menu a{
+    color:#dbe3ef;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.menu a:hover{
+    color:white;
+}
+
+.logout-btn{
+    background:#5a2030;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+}
+
+/* ================= PAGE ================= */
+
+.container{
+    width:95%;
+    margin:25px auto;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:42px;
+    color:#1f2937;
+}
+
+.page-title p{
+    color:#666;
+    margin-top:5px;
+}
+
+.back-btn{
+    text-decoration:none;
+    border:1px solid #999;
+    color:#333;
+    padding:10px 18px;
+    border-radius:30px;
+    background:white;
+}
+
+/* ================= FORM ================= */
+
+.form-row{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+.field label{
+    font-weight:600;
+    margin-bottom:8px;
+    color:#222;
+}
+
+.required{
+    color:#e53935;
+}
+
+.input-box{
+    display:flex;
+    align-items:center;
+    border:1px solid #ddd;
+    border-radius:8px;
+    overflow:hidden;
+    background:white;
+}
+
+.input-box i{
+    width:45px;
+    text-align:center;
+    color:#666;
+}
+
+.input-box input{
+    border:none;
+    width:100%;
+    padding:12px;
+    outline:none;
+    font-size:14px;
+}
+
+textarea{
+    width:100%;
+    min-height:100px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:12px;
+    resize:none;
+    outline:none;
+}
+
+.help-text{
+    margin-top:6px;
+    color:#777;
+    font-size:12px;
+}
+
+.actions{
+    margin-top:15px;
+}
+
+.btn-save{
+    background:#202733;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn-cancel{
+    display:inline-block;
+    margin-left:10px;
+    text-decoration:none;
+    border:1px solid #ccc;
+    color:#666;
+    padding:11px 18px;
+    border-radius:10px;
+}
+
+.note{
+    margin-top:15px;
+    color:#777;
+    font-size:13px;
+}
+
+@media(max-width:900px){
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .menu{
+        display:none;
+    }
+
+    .page-header{
+        flex-direction:column;
+        gap:15px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🏋 My.Gym
+    </div>
+
+    <div class="menu">
+        <a href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a href="#"><i class="bi bi-people"></i> Members</a>
+        <a href="#"><i class="bi bi-file-text"></i> Plans</a>
+        <a href="#"><i class="bi bi-person-badge"></i> Trainers</a>
+        <a href="#"><i class="bi bi-credit-card"></i> Payments</a>
+        <a href="#"><i class="bi bi-calendar-check"></i> Attendance</a>
+        <a href="#"><i class="bi bi-tools"></i> Equipment</a>
+        <a href="#"><i class="bi bi-question-circle"></i> Enquiries</a>
+        <a href="#"><i class="bi bi-heart-pulse"></i> Workout Plans</a>
+        <a href="#"><i class="bi bi-star"></i> Feedbacks</a>
+    </div>
+
+    <a href="#" class="logout-btn">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+
+</nav>
+
+<!-- CONTENT -->
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="page-header">
+
+            <div class="page-title">
+
+                <h1>
+                    <i class="bi bi-plus-lg"></i>
+                    Add Plan
+                </h1>
+
+                <p>
+                    Define membership duration, fee and plan features.
+                </p>
+
+            </div>
+
+            <a href="{% url 'adminplan' %}" class="back-btn">
+                <i class="bi bi-arrow-left"></i>
+                Back to Plans
+            </a>
+
+        </div>
+
+        <form method="GET" action="/addplan1">
+
+            {% csrf_token %}
+
+            <div class="form-row">
+
+                <div class="field">
+
+                    <label>
+                        Plan Name <span class="required">*</span>
+                    </label>
+
+                    <div class="input-box">
+                        <i class="bi bi-award-fill"></i>
+
+                        <!-- Django -->
+                        <!-- {{ form.name }} -->
+
+                        <input
+                            type="text" name="pname"
+                            placeholder="e.g. Gold / Premium / Student Plan">
+                    </div>
+
+                </div>
+
+                <div class="field">
+
+                    <label>
+                        Duration (months)
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="input-box">
+                        <i class="bi bi-clock"></i>
+
+                        <!-- {{ form.duration }} -->
+
+                        <input
+                            type="number" name="ptime"
+                            placeholder="e.g. 1, 3, 6, 12">
+                    </div>
+
+                </div>
+
+                <div class="field">
+
+                    <label>
+                        Fee <span class="required">*</span>
+                    </label>
+
+                    <div class="input-box">
+                        <i class="bi bi-currency-rupee"></i>
+
+                        <!-- {{ form.fee }} -->
+
+                        <input
+                            type="number" name="prent"
+                            placeholder="e.g. 999">
+                    </div>
+
+                    <div class="help-text">
+                        Enter total plan fee (in INR).
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Description / Features
+                </label>
+
+                <!-- {{ form.description }} -->
+
+                <textarea
+                   name="pdes" placeholder="Example: Access to gym + cardio, diet guidance, trainer support..."></textarea>
+
+            </div>
+
+            <div class="actions">
+
+                <button type="submit" class="btn-save">
+                    <i class="bi bi-save-fill"></i>
+                    Save Plan
+                </button>
+
+                <a href="#" class="btn-cancel">
+                    <i class="bi bi-x-lg"></i>
+                    Cancel
+                </a>
+
+            </div>
+
+            <div class="note">
+                Fields marked with <span class="required">*</span> are mandatory.
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

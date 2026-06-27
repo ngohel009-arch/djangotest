@@ -1,0 +1,572 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at 10% 10%,#dbeafe 0,#dbeafe 18%,transparent 35%),
+    radial-gradient(circle at 90% 20%,#cffafe 0,#cffafe 16%,transparent 32%),
+    radial-gradient(circle at 50% 100%,#fef3c7 0,#fef3c7 14%,transparent 35%),
+    #f8fbff;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+    width:94%;
+    margin:22px auto;
+    background:rgba(255,255,255,.75) !important;
+    backdrop-filter:blur(18px);
+    border-radius:30px;
+    padding:18px 30px;
+    box-shadow:0 20px 45px rgba(37,99,235,.13);
+    border:1px solid rgba(255,255,255,.8);
+    position:sticky;
+    top:15px;
+    z-index:100;
+}
+
+.navbar-brand{
+    font-size:30px;
+    font-weight:950;
+    color:#1d4ed8 !important;
+}
+
+.navbar-brand i{
+    color:#06b6d4;
+    background:#ecfeff;
+    padding:12px;
+    border-radius:18px;
+}
+
+.nav-link{
+    color:#475569 !important;
+    padding:11px 17px !important;
+    border-radius:16px;
+    font-weight:850;
+    transition:.3s;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white !important;
+    box-shadow:0 10px 22px rgba(37,99,235,.28);
+}
+
+.logout-btn{
+    background:#fee2e2 !important;
+    color:#dc2626 !important;
+    border-radius:16px;
+    padding:11px 18px;
+    font-weight:900;
+}
+
+.logout-btn:hover{
+    background:#dc2626 !important;
+    color:white !important;
+}
+
+/* MAIN CARD */
+.main-card{
+    width:94%;
+    margin:35px auto;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(15px);
+    border-radius:38px;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid rgba(226,232,240,.9);
+}
+
+/* PAGE HEADER */
+.page-title{
+    font-size:46px;
+    font-weight:950;
+    color:#0f172a;
+}
+
+.page-title i{
+    color:#2563eb;
+}
+
+.subtitle{
+    color:#64748b;
+    font-size:16px;
+    font-weight:700;
+}
+
+/* BUTTONS */
+.btn-custom,
+.btn-dark-custom,
+.btn-outline-custom,
+.btn-outline-dark{
+    min-width:190px;
+    height:50px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    border-radius:18px !important;
+    font-size:16px;
+    font-weight:900;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.btn-dark-custom{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white !important;
+    border:none;
+}
+
+.btn-dark-custom:hover{
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(37,99,235,.35);
+}
+
+.btn-outline-dark{
+    background:white;
+    color:#1d4ed8 !important;
+    border:2px solid #dbeafe !important;
+}
+
+.btn-outline-dark:hover{
+    background:#eff6ff;
+    color:#2563eb !important;
+    transform:translateY(-3px);
+}
+
+/* PROFILE CARD */
+.profile-card{
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:34px;
+    padding:32px;
+    height:100%;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid #e2e8f0;
+    position:relative;
+    overflow:hidden;
+}
+
+.profile-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:9px;
+    background:linear-gradient(to right,#2563eb,#06b6d4,#22c55e);
+}
+
+.profile-card::after{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#eff6ff,#ecfeff);
+    right:-60px;
+    top:-60px;
+    z-index:0;
+}
+
+.profile-card > *{
+    position:relative;
+    z-index:2;
+}
+
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#eff6ff,#ecfeff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    color:#2563eb;
+    box-shadow:inset 0 0 0 1px #bfdbfe;
+}
+
+.profile-card h4{
+    font-size:28px;
+    font-weight:950;
+    color:#0f172a;
+}
+
+.profile-card hr{
+    border-color:#dbeafe;
+}
+
+/* QUICK INFO */
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:14px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+    padding:14px 16px;
+    transition:.3s;
+}
+
+.info-row:hover{
+    background:#eff6ff;
+    transform:translateX(5px);
+    border-color:#93c5fd;
+}
+
+.info-row span{
+    color:#475569;
+    font-weight:850;
+}
+
+.info-row span i{
+    color:#2563eb;
+    margin-right:6px;
+}
+
+.info-row strong{
+    color:#0f172a;
+    font-weight:950;
+}
+
+.section-text{
+    color:#64748b;
+    font-size:15px;
+    font-weight:700;
+    line-height:1.7;
+}
+
+/* PROFILE TABLE */
+.profile-table{
+    background:rgba(255,255,255,.95);
+    border-radius:34px;
+    overflow:hidden;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid #e2e8f0;
+}
+
+.table-header{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    padding:18px 22px;
+    font-size:18px;
+    font-weight:950;
+}
+
+.table{
+    margin:0;
+}
+
+.table th{
+    background:#f8fafc;
+    color:#0f172a;
+    padding:18px;
+    font-weight:950;
+    border-color:#e2e8f0;
+}
+
+.table td{
+    color:#334155;
+    padding:18px;
+    font-weight:750;
+    border-color:#e2e8f0;
+}
+
+.table tr:hover td,
+.table tr:hover th{
+    background:#eff6ff;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .navbar{
+        width:95%;
+        border-radius:22px;
+        position:relative;
+        top:0;
+    }
+
+    .navbar-nav{
+        text-align:center;
+    }
+
+    .main-card{
+        width:95%;
+        padding:22px;
+    }
+
+    .page-title{
+        font-size:34px;
+    }
+
+    .d-flex.justify-content-between{
+        flex-direction:column;
+        align-items:flex-start !important;
+        gap:16px;
+    }
+
+    .btn-dark-custom,
+    .btn-outline-dark{
+        width:100%;
+    }
+
+    .profile-card{
+        margin-bottom:22px;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold" href="{% url 'memberdashboard' %}">
+            🏋 My Gym
+        </a>
+
+        <ul class="navbar-nav ms-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberdashboard' %}">
+                    <i class="fa-solid fa-gauge"></i> Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'memberprofile' %}">
+                    <i class="fa-solid fa-id-card"></i> My Profile
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberbooking' %}">
+                    <i class="fa-solid fa-ticket"></i> Booking
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'membermembership' %}">
+                    <i class="fa-solid fa-crown"></i> Membership
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberattendance' %}">
+                    <i class="fa-solid fa-calendar-check"></i> Attendance
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberpayment' %}">
+                    <i class="fa-solid fa-wallet"></i> Payments
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberworkout' %}">
+                    <i class="fa-solid fa-dumbbell"></i> Workout Plans
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberfeedback' %}">
+                    <i class="fa-solid fa-message"></i> Feedback
+                </a>
+            </li>
+
+            <li class="nav-item ms-2">
+                <a class="btn logout-btn" href="#">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid px-4">
+
+    <div class="main-card">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+                <h2 class="page-title">
+                    <i class="fa-solid fa-id-card"></i>
+                    My Profile
+                </h2>
+
+                <p class="subtitle">
+                    View and manage your personal details.
+                </p>
+            </div>
+
+            <div>
+                <a href="{% url 'membereditprofile' %}" class="btn btn-dark-custom">
+                    <i class="fa-solid fa-user-pen"></i>
+                    Edit Profile
+                </a>
+
+                <a href="{% url 'memberchangepassword' %}" class="btn btn-outline-dark">
+                    <i class="fa-solid fa-key"></i>
+                    Change Password
+                </a>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <!-- Left Side -->
+
+            <div class="col-md-4">
+
+                <div class="profile-card">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div class="ms-3">
+                            <h4>{{ obj.mname }}</h4>
+                            <span class="text-muted">
+                                Member ID : {{ obj.mid }}
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <h6 class="text-muted mb-3">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Quick Info
+                    </h6>
+
+                    <div class="info-row">
+                        <span>
+                            <i class="fa-solid fa-phone"></i> Mobile
+                        </span>
+                        <strong>{{ obj.mmobile }}</strong>
+                    </div>
+
+                    <div class="info-row">
+                        <span>
+                            <i class="fa-solid fa-hashtag"></i> Age
+                        </span>
+                        <strong>{{ obj.mage }}</strong>
+                    </div>
+
+                    <div class="info-row">
+                        <span>
+                            <i class="fa-solid fa-venus-mars"></i> Gender
+                        </span>
+                        <strong>{{ obj.mgender }}</strong>
+                    </div>
+
+                    <div class="info-row">
+                        <span>
+                            <i class="fa-solid fa-clock"></i> Gym Join Date
+                        </span>
+                        <strong>{{ obj.mtime }}</strong>
+                    </div>
+
+                    <hr>
+
+                    <p class="section-text">
+                        <i class="fa-solid fa-shield"></i>
+                        Keep your profile updated for smooth membership tracking.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Right Side -->
+
+            <div class="col-md-8">
+
+                <div class="profile-table">
+
+                    <div class="table-header">
+                        <i class="fa-solid fa-list"></i>
+                        Profile Details
+                    </div>
+
+                    <table class="table table-bordered mb-0">
+
+                        <tr>
+                            <th width="30%">Member ID</th>
+                            <td>{{ obj.mid }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Member Name</th>
+                            <td>{{ obj.mname }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Mobile</th>
+                            <td>{{ obj.mmobile }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Age</th>
+                            <td>{{ obj.mage }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Gender</th>
+                            <td>{{ obj.mgender }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Address</th>
+                            <td>{{ obj.maddress }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Gym Join Date</th>
+                            <td>{{ obj.mtime }}</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

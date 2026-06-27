@@ -1,0 +1,467 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at 10% 10%,#dbeafe 0,#dbeafe 18%,transparent 35%),
+    radial-gradient(circle at 90% 20%,#cffafe 0,#cffafe 16%,transparent 32%),
+    radial-gradient(circle at 50% 100%,#fef3c7 0,#fef3c7 14%,transparent 35%),
+    #f8fbff;
+}
+
+/* NAVBAR */
+.navbar{
+    width:94%;
+    margin:22px auto;
+    background:rgba(255,255,255,.75) !important;
+    backdrop-filter:blur(18px);
+    border-radius:30px;
+    padding:18px 30px;
+    box-shadow:0 20px 45px rgba(37,99,235,.13);
+    border:1px solid rgba(255,255,255,.8);
+    position:sticky;
+    top:15px;
+    z-index:100;
+}
+
+.navbar-brand{
+    font-size:30px;
+    font-weight:950;
+    color:#1d4ed8 !important;
+}
+
+.navbar-brand i{
+    color:#06b6d4;
+    background:#ecfeff;
+    padding:12px;
+    border-radius:18px;
+}
+
+.nav-link{
+    color:#475569 !important;
+    padding:11px 17px !important;
+    border-radius:16px;
+    font-weight:850;
+    transition:.3s;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white !important;
+    box-shadow:0 10px 22px rgba(37,99,235,.28);
+}
+
+.logout-btn{
+    background:#fee2e2 !important;
+    color:#dc2626 !important;
+    border-radius:16px;
+    padding:11px 18px;
+    font-weight:900;
+    text-decoration:none;
+}
+
+.logout-btn:hover{
+    background:#dc2626 !important;
+    color:white !important;
+}
+
+/* MAIN CARD */
+.main-card{
+    width:94%;
+    margin:35px auto;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(15px);
+    border-radius:38px;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid rgba(226,232,240,.9);
+}
+
+.page-title{
+    font-size:46px;
+    font-weight:950;
+    color:#0f172a;
+}
+
+.page-title i{
+    color:#2563eb;
+}
+
+.subtitle{
+    color:#64748b;
+    font-size:16px;
+    font-weight:700;
+}
+
+/* FORM CARD */
+.form-card{
+    margin-top:30px;
+    background:rgba(255,255,255,.95);
+    border-radius:34px;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid #e2e8f0;
+    position:relative;
+    overflow:hidden;
+}
+
+.form-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:9px;
+    background:linear-gradient(to right,#2563eb,#06b6d4,#22c55e);
+}
+
+.form-card::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#eff6ff,#ecfeff);
+    right:-70px;
+    top:-70px;
+    z-index:0;
+}
+
+.form-card > *{
+    position:relative;
+    z-index:2;
+}
+
+.avatar-box{
+    width:110px;
+    height:110px;
+    border-radius:35px;
+    background:linear-gradient(135deg,#eff6ff,#ecfeff);
+    color:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
+    box-shadow:inset 0 0 0 1px #bfdbfe;
+}
+
+.form-label{
+    font-weight:900;
+    color:#0f172a;
+}
+
+.form-control,
+.form-select,
+textarea{
+    border-radius:18px;
+    padding:14px 16px;
+    border:1px solid #dbeafe;
+    background:#f8fafc;
+    font-weight:700;
+    color:#334155;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+    background:white;
+}
+
+textarea{
+    resize:none;
+    min-height:110px;
+}
+
+/* BUTTONS */
+.save-btn{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    border:none;
+    border-radius:20px;
+    padding:15px 28px;
+    font-size:16px;
+    font-weight:950;
+    transition:.3s;
+}
+
+.save-btn:hover{
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(37,99,235,.35);
+}
+
+.cancel-btn{
+    background:white;
+    color:#1d4ed8;
+    border:2px solid #dbeafe;
+    border-radius:20px;
+    padding:14px 28px;
+    font-size:16px;
+    font-weight:950;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.cancel-btn:hover{
+    background:#eff6ff;
+    color:#2563eb;
+    transform:translateY(-3px);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .navbar{
+        width:95%;
+        border-radius:22px;
+        position:relative;
+        top:0;
+    }
+
+    .navbar-nav{
+        text-align:center;
+    }
+
+    .main-card{
+        width:95%;
+        padding:22px;
+    }
+
+    .page-title{
+        font-size:34px;
+    }
+
+    .form-card{
+        padding:24px;
+    }
+
+    .avatar-box{
+        margin:auto;
+    }
+
+    .save-btn,
+    .cancel-btn{
+        width:100%;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold" href="{% url 'memberdashboard' %}">
+            🏋 My Gym
+        </a>
+
+        <ul class="navbar-nav ms-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberdashboard' %}">
+                    <i class="fa-solid fa-gauge"></i> Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'memberprofile' %}">
+                    <i class="fa-solid fa-id-card"></i> My Profile
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberbooking' %}">
+                    <i class="fa-solid fa-ticket"></i> Booking
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'membermembership' %}">
+                    <i class="fa-solid fa-crown"></i> Membership
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberattendance' %}">
+                    <i class="fa-solid fa-calendar-check"></i> Attendance
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberpayment' %}">
+                    <i class="fa-solid fa-wallet"></i> Payments
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberworkout' %}">
+                    <i class="fa-solid fa-dumbbell"></i> Workout Plans
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'memberfeedback' %}">
+                    <i class="fa-solid fa-message"></i> Feedback
+                </a>
+            </li>
+
+            <li class="nav-item ms-2">
+                <a class="btn logout-btn" href="#">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="main-card">
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+        <div>
+            <h2 class="page-title">
+                <i class="fa-solid fa-user-pen"></i>
+                Edit Profile
+            </h2>
+
+            <p class="subtitle">
+                Update your personal details and keep your profile information accurate.
+            </p>
+        </div>
+
+        <a href="{% url 'memberprofile' %}" class="cancel-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back Profile
+        </a>
+
+    </div>
+
+    <div class="form-card">
+
+        <div class="row align-items-center mb-4">
+
+            <div class="col-md-2">
+                <div class="avatar-box">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <h3 class="fw-bold text-dark mb-1">
+                    {{ obj.mname }}
+                </h3>
+                <p class="text-muted fw-bold mb-0">
+                    Member ID : {{ obj.mid }}
+                </p>
+            </div>
+
+        </div>
+
+        <form method="POST" action="{% url 'updatememberprofile' obj.mid %}">
+            {% csrf_token %}
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <label class="form-label">
+                        <i class="fa-solid fa-user"></i>
+                        Member Name
+                    </label>
+                    <input type="text" name="mname" value="{{ obj.mname }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">
+                        <i class="fa-solid fa-phone"></i>
+                        Mobile Number
+                    </label>
+                    <input type="text" name="mmobile" value="{{ obj.mmobile }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">
+                        <i class="fa-solid fa-hashtag"></i>
+                        Age
+                    </label>
+                    <input type="text" name="mage" value="{{ obj.mage }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">
+                        <i class="fa-solid fa-venus-mars"></i>
+                        Gender
+                    </label>
+
+                    <select name="mgender" class="form-select" required>
+                        <option value="Male" {% if obj.mgender == "Male" %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if obj.mgender == "Female" %}selected{% endif %}>Female</option>
+                        <option value="Other" {% if obj.mgender == "Other" %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Gym Join Date
+                    </label>
+                    <input type="text" name="mtime" value="{{ obj.mtime }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">
+                        <i class="fa-solid fa-lock"></i>
+                        Password
+                    </label>
+                    <input type="text" name="mpass" value="{{ obj.mpass }}" class="form-control" required>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Address
+                    </label>
+                    <textarea name="maddress" class="form-control" required>{{ obj.maddress }}</textarea>
+                </div>
+
+                <div class="col-md-12 d-flex gap-3 flex-wrap mt-4">
+                    <button type="submit" class="save-btn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Changes
+                    </button>
+
+                    <a href="{% url 'memberprofile' %}" class="cancel-btn">
+                        <i class="fa-solid fa-xmark"></i>
+                        Cancel
+                    </a>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

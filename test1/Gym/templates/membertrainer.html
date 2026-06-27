@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Trainer</title>
+
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at 10% 10%,#dbeafe 0,#dbeafe 18%,transparent 35%),
+    radial-gradient(circle at 90% 20%,#cffafe 0,#cffafe 16%,transparent 32%),
+    radial-gradient(circle at 50% 100%,#fef3c7 0,#fef3c7 14%,transparent 35%),
+    #f8fbff;
+    overflow-x:hidden;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    width:94%;
+    margin:22px auto;
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(18px);
+    border-radius:30px;
+    padding:18px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 18px 45px rgba(37,99,235,.12);
+    border:1px solid rgba(255,255,255,.8);
+}
+
+.logo{
+    font-size:30px;
+    font-weight:900;
+    color:#1d4ed8;
+}
+
+.logo i{
+    color:#06b6d4;
+    background:#ecfeff;
+    padding:12px;
+    border-radius:18px;
+}
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.menu a{
+    color:#475569;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:800;
+    padding:11px 16px;
+    border-radius:16px;
+    transition:.3s;
+}
+
+.menu a:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:#fff;
+    box-shadow:0 10px 22px rgba(37,99,235,.25);
+}
+
+.logout{
+    background:#fee2e2 !important;
+    color:#dc2626 !important;
+    font-weight:900 !important;
+}
+
+.logout:hover{
+    background:#dc2626 !important;
+    color:#fff !important;
+}
+
+/* ================= MAIN CONTAINER ================= */
+
+.container{
+    width:94%;
+    margin:30px auto;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(16px);
+    border-radius:35px;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid #e2e8f0;
+}
+
+.title{
+    font-size:44px;
+    font-weight:900;
+    color:#0f172a;
+}
+
+.title i{
+    color:#2563eb;
+}
+
+.subtitle{
+    color:#64748b;
+    font-size:16px;
+    font-weight:600;
+    margin-top:8px;
+    margin-bottom:30px;
+}
+
+/* ================= TRAINER GRID ================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+/* ================= TRAINER CARD ================= */
+
+.trainer-card{
+    background:#fff;
+    border-radius:28px;
+    padding:28px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid #e2e8f0;
+    box-shadow:0 18px 40px rgba(15,23,42,.08);
+    transition:.35s;
+}
+
+.trainer-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:7px;
+    background:linear-gradient(90deg,#2563eb,#06b6d4,#22c55e);
+}
+
+.trainer-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 55px rgba(37,99,235,.18);
+}
+
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:24px;
+    background:#dbeafe;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+.trainer-name{
+    font-size:28px;
+    font-weight:900;
+    color:#0f172a;
+    margin-bottom:16px;
+}
+
+.info{
+    color:#475569;
+    font-size:15px;
+    font-weight:700;
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.info i{
+    color:#06b6d4;
+    font-size:18px;
+}
+
+/* ================= BUTTON ================= */
+
+.select-btn{
+    display:inline-block;
+    margin-top:18px;
+    padding:14px 22px;
+    border-radius:16px;
+    text-decoration:none;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:#fff;
+    font-weight:900;
+    transition:.3s;
+}
+
+.select-btn:hover{
+    color:#fff;
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(37,99,235,.35);
+}
+
+/* ================= EMPTY ================= */
+
+.no-data{
+    grid-column:1/-1;
+    text-align:center;
+    background:#fff;
+    padding:60px;
+    border-radius:30px;
+    font-size:30px;
+    font-weight:900;
+    color:#dc2626;
+    box-shadow:0 18px 40px rgba(15,23,42,.08);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:18px;
+        text-align:center;
+    }
+
+    .menu{
+        justify-content:center;
+    }
+
+    .container{
+        width:96%;
+        padding:22px;
+    }
+
+    .title{
+        font-size:34px;
+    }
+
+    .avatar{
+        width:75px;
+        height:75px;
+        font-size:34px;
+    }
+
+    .trainer-name{
+        font-size:24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        🏋 My Gym
+    </div>
+
+    <div class="menu">
+        <a href="/memberdashboard/"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a href="/memberprofile/"><i class="bi bi-person-vcard"></i> My Profile</a>
+        <a href="/memberbooking/"><i class="fa-solid fa-ticket"></i>Booking</a>
+        <a href="/membermembership/"><i class="fa-solid fa-crown"></i> Membership</a>
+        <a href="/memberattendance/"><i class="bi bi-calendar-event"></i> Attendance</a>
+        <a href="/memberpayment/"><i class="bi bi-credit-card"></i> Payments</a>
+        <a href="/memberworkout/"><i class="bi bi-hospital"></i> Workout Plans</a>
+        <a href="/memberfeedback/"><i class="bi bi-chat-left-fill"></i> Feedback</a>
+        <a href="/memberlogin/" class="logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="title">
+        <i class="bi bi-person-plus-fill"></i> Select Trainer
+    </div>
+
+    <div class="subtitle">
+        Choose your trainer according to specialization and shift timing.
+    </div>
+
+    <div class="cards">
+
+        {% for trainer in trainers %}
+
+        <div class="trainer-card">
+
+            <div class="avatar">
+                <i class="bi bi-person-fill"></i>
+            </div>
+
+            <div class="trainer-name">
+                {{ trainer.tname }}
+            </div>
+
+            <div class="info">
+                <i class="bi bi-bullseye"></i>
+                {{ trainer.tdes }}
+            </div>
+
+            <div class="info">
+                <i class="bi bi-telephone-fill"></i>
+                {{ trainer.tmobile }}
+            </div>
+
+            <div class="info">
+                <i class="bi bi-clock-fill"></i>
+                {{ trainer.ttime }}
+            </div>
+
+            <a href="/memberpay/?tid={{ trainer.tid }}&pid={{pid}}" class="select-btn">
+                <i class="bi bi-check-circle-fill"></i>
+                Select Trainer
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <div class="no-data">
+            No Trainers Found
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+
+    <h2>Student Registration Form</h2>
+
+    <form action="/getform1">
+        {% csrf_token %}
+        {% load static %}
+        <img src="{% static 'images/naitik.png' %}" width="200" height="200">
+        <label>Full Name:</label><br>
+        <input type="text" name="fullname" placeholder="Enter your name"><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" placeholder="Enter your email"><br><br>
+
+        <label>Mobile Number:</label><br>
+        <input type="tel" name="number" placeholder="Enter mobile number"><br><br>
+
+        <label>Address:</label><br>
+        <textarea name="address" rows="4" cols="30" placeholder="Enter your address"></textarea><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender"> Female<br><br>
+
+        <label>City:</label><br>
+        <select>
+            <option>Jamnagar</option>
+            <option>Rajkot</option>
+            <option>Ahmedabad</option>
+            <option>Surat</option>
+        </select><br><br>
+
+        <label>Hobbies:</label><br>
+        <input type="checkbox"> Reading
+        <input type="checkbox"> Coding
+        <input type="checkbox"> Gaming<br><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+
+    </form>
+
+</body>
+</html>

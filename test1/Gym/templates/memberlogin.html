@@ -1,0 +1,446 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Login - My Gym</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at 10% 10%,#dbeafe 0,#dbeafe 18%,transparent 35%),
+    radial-gradient(circle at 90% 20%,#cffafe 0,#cffafe 16%,transparent 32%),
+    radial-gradient(circle at 50% 100%,#fef3c7 0,#fef3c7 14%,transparent 35%),
+    #f8fbff;
+}
+
+/* NAVBAR */
+.navbar-custom{
+    width:94%;
+    margin:22px auto;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(18px);
+    border-radius:30px;
+    padding:18px 30px;
+    box-shadow:0 20px 45px rgba(37,99,235,.13);
+    border:1px solid rgba(255,255,255,.8);
+}
+
+.navbar-brand{
+    font-size:30px;
+    font-weight:950;
+    color:#1d4ed8 !important;
+}
+
+.login-btn{
+    border-radius:18px;
+    padding:11px 20px;
+    font-weight:900;
+}
+
+.btn-outline-light.login-btn{
+    background:#eff6ff;
+    color:#2563eb;
+    border:2px solid #dbeafe;
+}
+
+.btn-success.login-btn{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    border:none;
+    color:white;
+}
+
+/* LOGIN */
+.login-wrapper{
+    margin-top:35px;
+    margin-bottom:40px;
+}
+
+.login-card{
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:38px;
+    overflow:hidden;
+    box-shadow:0 20px 55px rgba(15,23,42,.12);
+    border:1px solid #e2e8f0;
+}
+
+.left-panel{
+    position:relative;
+    height:100%;
+    min-height:590px;
+}
+
+.left-panel img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(37,99,235,.70),rgba(6,182,212,.55));
+}
+
+.portal-text{
+    position:absolute;
+    bottom:35px;
+    left:35px;
+    right:30px;
+    color:white;
+}
+
+.portal-text h3{
+    font-size:32px;
+    font-weight:950;
+}
+
+/* FORM */
+.form-section{
+    padding:55px;
+}
+
+.icon-box{
+    width:70px;
+    height:70px;
+    background:linear-gradient(135deg,#eff6ff,#ecfeff);
+    border-radius:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#2563eb;
+    font-size:28px;
+    box-shadow:inset 0 0 0 1px #bfdbfe;
+}
+
+.top-buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.top-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:10px 16px;
+    border-radius:14px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.signup-btn{
+    background:#eff6ff;
+    color:#2563eb;
+    border:1px solid #bfdbfe;
+}
+
+.forgot-btn{
+    background:#fff7ed;
+    color:#ea580c;
+    border:1px solid #fed7aa;
+}
+
+.home-btn{
+    background:#f3f4f6;
+    color:#374151;
+    border:1px solid #d1d5db;
+}
+
+.top-btn:hover{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px rgba(37,99,235,.25);
+}
+
+.login-title{
+    font-size:42px;
+    font-weight:950;
+    margin-top:25px;
+    color:#0f172a;
+}
+
+.login-title i{
+    color:#2563eb;
+}
+
+.form-label{
+    font-weight:900;
+    color:#0f172a;
+}
+
+.input-group{
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(37,99,235,.06);
+}
+
+.input-group-text{
+    background:#eff6ff;
+    color:#2563eb;
+    border:1px solid #dbeafe;
+    min-width:55px;
+    justify-content:center;
+}
+
+.form-control{
+    height:52px;
+    border:1px solid #dbeafe;
+    background:#f8fafc;
+    font-weight:700;
+}
+
+.form-control:focus{
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+    border-color:#2563eb;
+}
+
+.login-submit{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    border:none;
+    color:white;
+    font-weight:950;
+    border-radius:18px;
+    height:54px;
+    transition:.3s;
+}
+
+.login-submit:hover{
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(37,99,235,.35);
+}
+
+.info-text{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    color:#64748b;
+    font-size:14px;
+    font-weight:700;
+    padding:14px;
+    border-radius:18px;
+}
+
+@media(max-width:991px){
+    .left-panel{
+        min-height:320px;
+    }
+
+    .form-section{
+        padding:35px;
+    }
+}
+
+@media(max-width:768px){
+    .navbar-custom{
+        width:95%;
+        border-radius:22px;
+    }
+
+    .top-buttons{
+        width:100%;
+        margin-top:15px;
+        justify-content:center;
+    }
+
+    .top-btn{
+        flex:1;
+        justify-content:center;
+    }
+
+    .login-title{
+        font-size:34px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-custom">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="{% url 'home' %}">
+            🏋 My Gym
+        </a>
+
+        <div>
+            <a href="{% url 'adminlogin' %}" class="btn btn-outline-light login-btn me-2">
+                <i class="fa-solid fa-user-shield"></i>
+                Admin Login
+            </a>
+
+            <a href="{% url 'memberlogin' %}" class="btn btn-success login-btn">
+                <i class="fa-solid fa-user"></i>
+                Member Login
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container login-wrapper">
+
+    <div class="login-card">
+
+        <div class="row g-0">
+
+            <div class="col-lg-5">
+                <div class="left-panel">
+
+                    <img src="{% static 'images/memberlogin.jpg' %}" alt="Gym">
+
+                    <div class="overlay"></div>
+
+                    <div class="portal-text">
+                        <h3>
+                            <i class="fa-solid fa-dumbbell"></i>
+                            My.Gym Member Portal
+                        </h3>
+
+                        <p class="mb-0">
+                            Track attendance, payments, membership and workout plans in one place.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+
+                <div class="form-section">
+
+                    <div class="d-flex justify-content-between align-items-start flex-wrap">
+
+                        <div class="icon-box">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div class="top-buttons">
+
+                            <a href="{% url 'adminaddmember' %}" class="top-btn signup-btn">
+                                <i class="fa-solid fa-user-plus"></i>
+                                Sign Up
+                            </a>
+
+                            <a href="/memberforgotpassword/" class="top-btn forgot-btn">
+                                <i class="fa-solid fa-key"></i>
+                                Forgot Password
+                            </a>
+
+                            <a href="{% url 'home' %}" class="top-btn home-btn">
+                                <i class="fa-solid fa-house"></i>
+                                Home
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <h2 class="login-title">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Member Login
+                    </h2>
+
+                    <p class="text-muted fw-bold">
+                        Sign in to your dashboard and details.
+                    </p>
+
+                    <hr>
+
+                    <form method="GET" action="/memberlogin1/">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-id-badge"></i>
+                                </span>
+
+                                <input type="text"
+                                       name="username"
+                                       class="form-control"
+                                       placeholder="Enter username"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Password</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-lock"></i>
+                                </span>
+
+                                <input type="password"
+                                       id="password"
+                                       name="password"
+                                       class="form-control"
+                                       placeholder="Enter password"
+                                       required>
+
+                                <button type="button"
+                                        class="input-group-text"
+                                        onclick="togglePassword()">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn login-submit w-100">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Login
+                        </button>
+
+                    </form>
+
+                    <div class="mt-3 info-text">
+                        <i class="fa-solid fa-circle-info"></i>
+                        If you face issues, contact the gym admin to reset your password.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function togglePassword(){
+    let pwd = document.getElementById("password");
+
+    if(pwd.type === "password"){
+        pwd.type = "text";
+    }else{
+        pwd.type = "password";
+    }
+}
+</script>
+
+</body>
+</html>

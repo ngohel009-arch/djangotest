@@ -1,0 +1,34 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+function adminLogout() {
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to logout?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Logout",
+        cancelButtonText: "Cancel"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            Swal.fire({
+                title: "Logout Successful!",
+                text: "Redirecting...",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false
+            });
+
+            setTimeout(function () {
+                window.location.href = "/adminlogout/";
+            }, 1500);
+
+        }
+
+    });
+
+}
+</script>

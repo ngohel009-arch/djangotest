@@ -1,0 +1,648 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Membership</title>
+
+    <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at 10% 10%,#dbeafe 0,#dbeafe 18%,transparent 35%),
+    radial-gradient(circle at 90% 20%,#cffafe 0,#cffafe 16%,transparent 32%),
+    radial-gradient(circle at 50% 100%,#fef3c7 0,#fef3c7 14%,transparent 35%),
+    #f8fbff;
+    overflow-x:hidden;
+}
+
+/* NAVBAR FIX */
+.navbar{
+    width:94%;
+    margin:24px auto;
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(18px);
+    border-radius:34px;
+    padding:22px 34px;
+    box-shadow:0 22px 50px rgba(37,99,235,.14);
+    border:1px solid rgba(255,255,255,.85);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:22px;
+    position:sticky;
+    top:15px;
+    z-index:100;
+    overflow:hidden;
+}
+
+/* LOGO */
+.logo{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    color:#1d4ed8;
+    font-size:34px;
+    font-weight:950;
+    white-space:nowrap;
+    flex-shrink:0;
+}
+
+.logo i{
+    width:62px;
+    height:62px;
+    background:#ecfeff;
+    color:#06b6d4;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+}
+
+/* MENU */
+.menu{
+    flex:1;
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.menu a{
+    color:#475569;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:900;
+    padding:11px 12px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    transition:.3s;
+    white-space:nowrap;
+}
+
+.menu a i{
+    font-size:15px;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    box-shadow:0 10px 22px rgba(37,99,235,.28);
+    transform:translateY(-2px);
+}
+
+/* LOGOUT */
+.menu .logout{
+    background:#fee2e2;
+    color:#dc2626;
+    font-weight:950;
+    padding:11px 16px;
+    flex-shrink:0;
+}
+
+.menu .logout:hover{
+    background:#dc2626;
+    color:white;
+    box-shadow:0 10px 22px rgba(220,38,38,.25);
+}
+
+
+/* MAIN CONTAINER */
+.container{
+    width:94%;
+    margin:35px auto;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(15px);
+    border-radius:38px;
+    padding:35px;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid rgba(226,232,240,.9);
+}
+
+/* PAGE TITLE */
+.title{
+    font-size:46px;
+    font-weight:950;
+    color:#0f172a;
+    margin-bottom:8px;
+}
+
+.title i{
+    color:#2563eb;
+}
+
+.subtitle{
+    color:#64748b;
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:28px;
+}
+
+/* TOP MEMBERSHIP CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-bottom:28px;
+}
+
+.info-card{
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:34px;
+    padding:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid #e2e8f0;
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.info-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:9px;
+    background:linear-gradient(to right,#2563eb,#06b6d4,#22c55e);
+}
+
+.info-card::after{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#eff6ff,#ecfeff);
+    right:-55px;
+    top:-55px;
+    z-index:0;
+}
+
+.info-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 55px rgba(37,99,235,.18);
+}
+
+.info-card > *{
+    position:relative;
+    z-index:2;
+}
+
+.label{
+    color:#64748b;
+    font-size:14px;
+    font-weight:850;
+    margin-bottom:8px;
+}
+
+.value{
+    font-size:25px;
+    font-weight:950;
+    color:#0f172a;
+}
+
+.value i{
+    color:#2563eb;
+}
+
+.small{
+    color:#64748b;
+    font-size:14px;
+    font-weight:700;
+    margin-top:6px;
+}
+
+/* STATUS */
+.active{
+    background:#dcfce7;
+    color:#16a34a;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:950;
+    display:inline-block;
+    margin-top:9px;
+}
+
+.expired{
+    background:#fee2e2;
+    color:#dc2626;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:950;
+    display:inline-block;
+    margin-top:9px;
+}
+
+/* ICON BOX */
+.icon-box{
+    width:62px;
+    height:62px;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.8);
+}
+
+.green{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.blue{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.red{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+/* SECTION TITLE */
+.section-title{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    padding:18px 22px;
+    border-radius:28px 28px 0 0;
+    font-size:18px;
+    font-weight:950;
+    box-shadow:0 12px 30px rgba(37,99,235,.22);
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:15px;
+    background:rgba(255,255,255,.95);
+    overflow:hidden;
+    border-radius:0 0 28px 28px;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid #e2e8f0;
+}
+
+td{
+    border:1px solid #e2e8f0;
+    padding:18px;
+    color:#334155;
+    font-weight:750;
+}
+
+td:first-child{
+    width:230px;
+    background:#f8fafc;
+    color:#0f172a;
+    font-weight:950;
+}
+
+tr:hover td{
+    background:#eff6ff;
+}
+
+td i{
+    color:#2563eb;
+}
+
+/* NO DATA */
+.no-data{
+    padding:55px 30px;
+    text-align:center;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(15px);
+    border-radius:34px;
+    color:#0f172a;
+    box-shadow:0 18px 45px rgba(15,23,42,.10);
+    border:1px solid #e2e8f0;
+    position:relative;
+    overflow:hidden;
+}
+
+.no-data::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:9px;
+    background:linear-gradient(to right,#2563eb,#06b6d4,#22c55e);
+}
+
+.no-data h2{
+    font-size:32px;
+    font-weight:950;
+    margin-bottom:10px;
+}
+
+.no-data p{
+    color:#64748b;
+    font-size:16px;
+    font-weight:700;
+}
+
+/* BUTTON */
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-top:18px;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white !important;
+    padding:13px 22px;
+    border-radius:18px;
+    text-decoration:none;
+    font-weight:950;
+    border:none;
+    transition:.3s;
+}
+
+.btn:hover{
+    color:white !important;
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(37,99,235,.35);
+}
+
+/* MEDIUM SCREEN */
+@media(max-width:1250px){
+    .navbar{
+        flex-direction:column;
+        align-items:center;
+        overflow:visible;
+    }
+
+    .menu{
+        width:100%;
+        justify-content:center;
+    }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .navbar{
+        width:95%;
+        padding:22px;
+        border-radius:26px;
+        position:relative;
+        top:0;
+    }
+
+    .logo{
+        font-size:30px;
+    }
+
+    .logo i{
+        width:56px;
+        height:56px;
+        font-size:27px;
+    }
+
+    .menu{
+        width:100%;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .menu a{
+        width:100%;
+        font-size:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <div class="logo">
+        🏋 My Gym
+    </div>
+
+    <div class="menu">
+
+        <a href="/memberdashboard/">
+            <i class="bi bi-speedometer2"></i>
+            Dashboard
+        </a>
+
+        <a href="/memberprofile/">
+            <i class="bi bi-person"></i>
+            My Profile
+        </a>
+
+        <a href="/memberbooking/">
+            <i class="fa-solid fa-ticket"></i>
+            Booking
+        </a>
+
+        <a href="/membermembership/" class="active">
+            <i class="fa-solid fa-crown"></i>
+            Membership
+        </a>
+
+        <a href="/memberattendance/">
+            <i class="bi bi-calendar-check"></i>
+            Attendance
+        </a>
+
+        <a href="/memberpayment/">
+            <i class="bi bi-credit-card"></i>
+            Payments
+        </a>
+
+        <a href="/memberworkout/">
+            <i class="bi bi-hospital"></i>
+            Workout Plans
+        </a>
+
+        <a href="/memberfeedback/">
+            <i class="bi bi-chat-left-text"></i>
+            Feedback
+        </a>
+
+        <a href="/memberlogin/" class="logout">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="title">
+        <i class="bi bi-crown-fill"></i> My Membership
+    </div>
+
+    <div class="subtitle">
+        Your current plan, validity dates and payment summary.
+    </div>
+
+    {% if membership %}
+
+    <div class="cards">
+
+        <div class="info-card">
+            <div>
+                <div class="label">Plan</div>
+                <div class="value">
+                    <i class="bi bi-crown-fill"></i> {{ membership.plan_name }}
+                </div>
+                <div class="small">Duration: {{ membership.duration }} month(s)</div>
+            </div>
+
+            <div class="icon-box green">
+                <i class="bi bi-calendar2-check-fill"></i>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div>
+                <div class="label">Days Remaining</div>
+                <div class="value">{{ membership.days_remaining }} day(s)</div>
+
+                {% if membership.days_remaining > 0 %}
+                    <span class="active">
+                        <i class="bi bi-check-circle-fill"></i> Active
+                    </span>
+                {% else %}
+                    <span class="expired">
+                        <i class="bi bi-x-circle-fill"></i> Expired
+                    </span>
+                {% endif %}
+            </div>
+
+            <div class="icon-box blue">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div>
+                <div class="label">Remaining Amount</div>
+                <div class="value">₹ {{ membership.remaining_amount }}</div>
+                <div class="small">Paid: ₹ {{ membership.total_paid }}</div>
+            </div>
+
+            <div class="icon-box red">
+                <i class="bi bi-credit-card-fill"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section-title">
+        <i class="bi bi-info-circle-fill"></i> Membership Details
+    </div>
+
+    <table>
+        <tr>
+            <td>Plan Name</td>
+            <td>{{ membership.plan_name }}</td>
+        </tr>
+
+        <tr>
+            <td>Duration</td>
+            <td>{{ membership.duration }} Month(s)</td>
+        </tr>
+
+        <tr>
+            <td>Plan Fee</td>
+            <td>₹ {{ membership.plan_fee }}</td>
+        </tr>
+
+        <tr>
+            <td>Total Paid</td>
+            <td>₹ {{ membership.total_paid }}</td>
+        </tr>
+
+        <tr>
+            <td>Remaining Amount</td>
+            <td>₹ {{ membership.remaining_amount }}</td>
+        </tr>
+
+        <tr>
+            <td>Start Date</td>
+            <td>
+                <i class="bi bi-calendar-event"></i>
+                {{ membership.start_date }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>End Date</td>
+            <td>
+                <i class="bi bi-calendar-event"></i>
+                {{ membership.end_date }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Days Remaining</td>
+            <td>{{ membership.days_remaining }} Day(s)</td>
+        </tr>
+
+        <tr>
+            <td>Trainer</td>
+            <td>{{ membership.trainer_name }}</td>
+        </tr>
+
+        <tr>
+            <td>Trainer Mobile</td>
+            <td>{{ membership.trainer_mobile }}</td>
+        </tr>
+
+        <tr>
+            <td>Trainer Time</td>
+            <td>{{ membership.trainer_time }}</td>
+        </tr>
+
+        <tr>
+            <td>Plan Details</td>
+            <td>{{ membership.plan_details }}</td>
+        </tr>
+    </table>
+
+    {% else %}
+
+    <div class="no-data">
+        <h2>No Membership Found</h2>
+        <p>You have not purchased any membership plan yet.</p>
+        <a href="/membermembership" class="btn">
+            <i class="bi bi-credit-card"></i> Buy Membership
+        </a>
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
