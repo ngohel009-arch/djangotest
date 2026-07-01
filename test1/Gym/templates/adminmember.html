@@ -5,10 +5,9 @@
     <meta charset="utf-8" />
     <title>Members</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
+  
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
       * {
@@ -37,6 +36,11 @@
         align-items: center;
         justify-content: space-between;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+      .nav-link.active{
+          background:linear-gradient(135deg,#2563eb,#06b6d4);
+          color:white !important;
+          box-shadow:0 10px 22px rgba(37,99,235,.28);
       }
 
       .logo {
@@ -332,21 +336,21 @@
       <div class="logo">🏋 My Gym</div>
 
       <div class="menu">
-        <a href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
-        <a href="#"><i class="bi bi-people"></i> Members</a>
-        <a href="#"><i class="bi bi-file-text"></i> Plans</a>
-        <a href="#"><i class="bi bi-person-badge"></i> Trainers</a>
-        <a href="#"><i class="bi bi-credit-card"></i> Payments</a>
-        <a href="#"><i class="bi bi-calendar-check"></i> Attendance</a>
-        <a href="#"><i class="bi bi-tools"></i> Equipment</a>
-        <a href="#"><i class="bi bi-question-circle"></i> Enquiries</a>
-        <a href="#"><i class="bi bi-heart-pulse"></i> Workout Plans</a>
-        <a href="#"><i class="bi bi-star"></i> Feedbacks</a>
-      </div>
+        <a href="{% url 'admindashboard' %}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a class="nav-link active" href="{% url 'adminmember' %}"><i class="bi bi-people"></i> Members</a>
+        <a href="{% url 'adminplan' %}"><i class="bi bi-file-text"></i> Plans</a>
+        <a href="{% url 'admintrainers' %}"><i class="bi bi-person-badge"></i> Trainers</a>
+        <a href="{% url 'adminpayment' %}"><i class="bi bi-credit-card"></i> Payments</a>
+        <a href="{% url 'adminattendance' %}"><i class="bi bi-calendar-check"></i> Attendance</a>
+        <a href="{% url 'adminequipment' %}"><i class="bi bi-tools"></i> Equipment</a>
+        <a href="{% url 'adminenquiries' %}"><i class="bi bi-question-circle"></i> Enquiries</a>
+        <a href="{% url 'adminworkoutplans' %}"><i class="bi bi-heart-pulse"></i> Workout Plans</a>
+        <a href="{% url 'adminfeedback' %}"><i class="bi bi-star"></i> Feedbacks</a>
+    </div>
 
-      <a href="#" class="logout-btn">
+    <a href="{% url 'adminlogout' %}" class="logout-btn">
         <i class="bi bi-box-arrow-right"></i> Logout
-      </a>
+    </a>
     </nav>
 
     <div class="container">

@@ -41,6 +41,13 @@ body{
     border:1px solid #e5e7eb;
 }
 
+.menu a:hover,
+.menu a.active{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    box-shadow:0 10px 22px rgba(37,99,235,.28);
+}
+
 .logo{
     font-size:28px;
     font-weight:900;
@@ -216,7 +223,7 @@ td[colspan="3"]{
     </style>
 </head>
 
-<body>
+<body>          
 
 <div class="navbar">
     <div class="logo">
@@ -226,9 +233,9 @@ td[colspan="3"]{
     <div class="menu">
         <a href="/memberdashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
         <a href="/memberprofile"><i class="bi bi-person-vcard"></i> My Profile</a>
-        <a href="/memberbooking/"><i class="fa-solid fa-ticket"></i> Booking</a>
+        <a href="/memberbooking"><i class="fa-solid fa-ticket"></i> Booking</a>
         <a href="/membermembership"><i class="fa-solid fa-crown"></i> Membership</a>
-        <a href="/memberattendance"><i class="bi bi-calendar-event"></i> Attendance</a>
+        <a class="nav-link active" href="/memberattendance"><i class="bi bi-calendar-event"></i> Attendance</a>
         <a href="/memberpayment"><i class="bi bi-credit-card"></i> Payments</a>
         <a href="/memberworkout"><i class="bi bi-hospital"></i> Workout Plans</a>
         <a href="/memberfeedback"><i class="bi bi-chat-left-fill"></i> Feedback</a>

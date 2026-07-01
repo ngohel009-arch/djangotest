@@ -10,6 +10,12 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+      <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
     *{
     margin:0;
@@ -25,78 +31,83 @@ body{
     radial-gradient(circle at bottom right,#cffafe 0%,transparent 30%),
     #f8fbff;
 }
-/* ================= NAVBAR ================= */
+/* NAVBAR */
+      .navbar {
+        width: 98%;
+        margin: 15px auto;
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      }
+      .nav-link.active{
+          background:linear-gradient(135deg,#2563eb,#06b6d4);
+          color:white !important;
+          box-shadow:0 10px 22px rgba(37,99,235,.28);
+      }
 
-.navbar-custom{
-    width:98%;
-    margin:18px auto;
-    padding:12px 22px;
-    border-radius:22px;
-    background:rgba(255,255,255,.92);
-    backdrop-filter:blur(15px);
-    box-shadow:0 12px 35px rgba(37,99,235,.12);
-    border:1px solid #e5e7eb;
-}
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: 900;
+        color: #2563eb;
+        min-width: 160px;
+      }
 
-.navbar-brand{
-    font-size:28px;
-    font-weight:900;
-    color:#2563eb !important;
-    white-space:nowrap;
-}
+      .menu {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
 
-.navbar-collapse{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+      .menu::-webkit-scrollbar {
+        display: none;
+      }
 
-.navbar-nav{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    gap:8px;
-    flex-wrap:nowrap;
-    margin:auto;
-}
+      .menu a {
+        text-decoration: none;
+        color: #475569;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px 14px;
+        border: 1px solid #dbeafe;
+        border-radius: 14px;
+        background: #fff;
+        transition: 0.3s;
+        flex-shrink: 0;
+      }
 
-.navbar-nav .nav-link{
-    color:#475569 !important;
-    padding:10px 12px !important;
-    border-radius:14px;
-    font-size:13px;
-    font-weight:800;
-    white-space:nowrap;
-    transition:.3s;
-}
+      .menu a:hover {
+        background: linear-gradient(135deg, #2563eb, #06b6d4);
+        color: #fff;
+      }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active{
-    background:linear-gradient(135deg,#2563eb,#06b6d4);
-    color:white !important;
-}
+      .logout-btn {
+        background: #fee2e2;
+        color: #dc2626;
+        padding: 10px 14px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 700;
+        border: 1px solid #fecaca;
+        flex-shrink: 0;
+      }
 
-.logout-btn{
-    text-decoration:none;
-    background:#fee2e2;
-    color:#dc2626;
-    padding:11px 18px;
-    border-radius:15px;
-    font-size:13px;
-    font-weight:900;
-    white-space:nowrap;
-    transition:.3s;
-}
+      .logout-btn:hover {
+        background: #dc2626;
+        color: #fff;
+      }
 
-.logout-btn:hover{
-    background:#dc2626;
-    color:white;
-}
-
-.navbar-toggler{
-    border:none;
-    border-radius:14px;
-}
 /* PAGE */
 
 .trainer-card{
@@ -268,9 +279,7 @@ body{
 
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="#">
-            🏋 My.Gym
-        </a>
+       <div class="logo">🏋 My Gym</div>
 
         <button class="navbar-toggler bg-light"
                 type="button"
@@ -279,77 +288,22 @@ body{
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse"
-             id="navbarNav">
+        <div class="menu">
+        <a href="{% url 'admindashboard' %}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a href="{% url 'adminmember' %}"><i class="bi bi-people"></i> Members</a>
+        <a href="{% url 'adminplan' %}"><i class="bi bi-file-text"></i> Plans</a>
+        <a class="nav-link active" href="{% url 'admintrainers' %}"><i class="bi bi-person-badge"></i> Trainers</a>
+        <a href="{% url 'adminpayment' %}"><i class="bi bi-credit-card"></i> Payments</a>
+        <a href="{% url 'adminattendance' %}"><i class="bi bi-calendar-check"></i> Attendance</a>
+        <a href="{% url 'adminequipment' %}"><i class="bi bi-tools"></i> Equipment</a>
+        <a href="{% url 'adminenquiries' %}"><i class="bi bi-question-circle"></i> Enquiries</a>
+        <a href="{% url 'adminworkoutplans' %}"><i class="bi bi-heart-pulse"></i> Workout Plans</a>
+        <a href="{% url 'adminfeedback' %}"><i class="bi bi-star"></i> Feedbacks</a>
+    </div>
 
-            <ul class="navbar-nav mx-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-chart-line"></i> Dashboard
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-users"></i> Members
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-file-lines"></i> Plans
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">
-                        <i class="fa-solid fa-user-tie"></i> Trainers
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-credit-card"></i> Payments
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-calendar-check"></i> Attendance
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-dumbbell"></i> Equipment
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-circle-question"></i> Enquiries
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-person-running"></i> Workout Plans
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-star"></i> Feedbacks
-                    </a>
-                </li>
-
-            </ul>
-
-            <a href="#" class="nav-link logout-btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                Logout
-            </a>
+    <a href="{% url 'adminlogout' %}" class="logout-btn">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
 
         </div>
 
